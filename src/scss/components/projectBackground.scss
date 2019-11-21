@@ -1,0 +1,43 @@
+.project-background {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    transform: scale(4);
+
+    &__item {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        z-index: 1;
+
+        &.blur {
+            z-index: 0;
+            visibility: visible;
+            opacity: 1;
+            filter: grayscale(0);
+        }
+    }
+}
+
+.project__header {
+    .project-background__item {
+        opacity: 1;
+        visibility: visible;
+        &.blur {
+            display: none;
+        }
+    }
+}
+
+.project__footer {
+    .project-background__item {
+        visibility: visible; //Having both images visible prevents image decode on hover which causes stutter, however is costly on performance so use sparingly
+    }
+}

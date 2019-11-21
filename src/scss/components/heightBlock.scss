@@ -1,0 +1,17 @@
+.height-block {
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    height: 15%;
+    background-color: $backgroundColour;
+    transform: translateY(100%);
+
+    @include breakpoint(tablet) {
+        height: 8%;
+    }
+}
+
+
+.project__header .height-block {
+    transform: translateY(1px);
+}

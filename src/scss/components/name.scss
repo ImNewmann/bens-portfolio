@@ -1,0 +1,50 @@
+.name {
+    opacity: 0;
+    display: block;
+    color: $textColour;
+    font-size: 6vw;
+    letter-spacing: -1px;
+    line-height: 1;
+    position: fixed;
+    top: 10%;
+    left: 8%;
+    z-index: 10;
+    background-image: url('#{$assets-dir}noise.gif');
+    background-clip: text;
+    transition: color .4s $bezierCurve;
+
+    @include breakpoint(tablet) {
+        left: 5%;
+        font-size: 30px;
+    }
+
+    span {
+        display: inline;
+        &:nth-child(3) {
+            padding-right: 3%;
+        }
+
+        nav &:not(:first-child):not(:last-child) {
+            font-size: 0;
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
+
+.intro.name {
+    font-size: 10vw;
+    pointer-events: none;
+    top: 50%;
+    left: 47%;
+    transform: translate(-47%, -50%);
+    
+    @include breakpoint (tablet) {
+        font-size: 80px;
+    }
+}
+
+.about-overlay .name {
+    color: $backgroundColour;
+    opacity: 0.9;
+}

@@ -1,0 +1,88 @@
+.about-project {
+    position: relative;
+    color: $textColour;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 110px 0;
+    padding: 0 5%;
+
+    @include breakpoint(tablet) {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+    }
+
+    &__item {
+      &:last-of-type {
+        @include breakpoint(tablet) {
+          width: 50%;
+          padding-left: 20px;
+        }
+
+        @include breakpoint (desktop) {
+          padding: 0;
+          width: 40%;
+        }
+      }
+      ul {
+        opacity: 0;
+        margin-bottom: 20px;
+
+        @include breakpoint(tablet) {
+          margin-bottom: 0;
+        }
+      }
+      li {
+        list-style: none;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+
+        &:not(.list__item) {
+          color: #8f969e;
+          font-weight: 500;
+          margin-bottom: 10px;
+
+          @include breakpoint(tablet) {
+            margin-bottom: 20px;
+          }
+        }
+      }
+ 
+      .list__item {
+        line-height: 25px;
+        font-weight: 600;
+        color: $textColour;
+      }
+
+      &:last-of-type {
+        margin-top: -5px;
+      }
+    }
+
+    &__visit-link {
+      font-size: 1.25em;
+      position: absolute;
+      bottom: -50px;
+      right: 8%;
+      color: transparent;
+      -webkit-text-stroke: 0.5px $textColour;
+      letter-spacing: 1px;
+      text-decoration: none;      
+      transition: transform 0.4s $bezierCurve, color 0.4s $bezierCurve;
+      transform: translateX(0) skewX(-15deg);
+
+
+      @include breakpoint(tablet) {
+        right: 5%;
+      }
+
+      @include breakpoint(desktop) {
+        right: 0;
+      }
+
+      &:hover {
+        transform: translateX(-20px) skewX(0deg);
+        color: $textColour;
+      }
+    }
+}

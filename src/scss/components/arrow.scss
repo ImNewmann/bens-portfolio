@@ -1,0 +1,233 @@
+// Variables
+
+$text-arrow-space: 16px;
+$shaft-width: 64px;
+$shaft-thickness: 1px;
+$arrow-head-width: 8px;
+$arrow-head-thickness: $shaft-thickness;
+
+// The Arrow
+
+.the-arrow {
+  width: $shaft-width;
+  transition: all 0.2s;
+  
+  &.-left {
+    position: absolute;
+    top: 60%;
+    left: 0;
+
+    > .shaft {
+      width: 0;
+      background-color: $textColour;
+      
+      &:before,
+      &:after {
+        width: 0;
+        background-color: $textColour;
+      }
+
+      &:before {
+        transform: rotate(0);
+      }
+
+      &:after {
+        transform: rotate(0);
+      }
+    }
+  }
+  
+  &.-right {
+    top: 3px;
+    
+    > .shaft {
+      width: $shaft-width;
+      transition-delay: 0.2s;
+
+      &:before,
+      &:after { 
+        width: $arrow-head-width;
+        transition-delay: 0.3s;
+        transition: all 0.5s;
+      }
+      
+      &:before {
+        transform: rotate(40deg);
+      }
+      
+      &:after {
+        transform: rotate(-40deg);
+      }
+    }
+  }
+
+  > .shaft {
+    background-color: $textColour;
+    display: block;
+    height: $shaft-thickness;
+    position: relative;
+    transition: all 0.2s;
+    transition-delay: 0;
+    transform: translateZ(0);
+    will-change: transform;
+
+    &:before,
+    &:after {
+      background-color: $textColour;
+      content: '';
+      display: block;
+      height: $arrow-head-thickness;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transition: all 0.2s;
+      transition-delay: 0;
+    }
+
+    &:before {
+      transform-origin: top right;
+    }
+
+    &:after {
+      transform-origin: bottom right;
+    }
+  }
+}
+    
+// Animated Arrow Button
+  
+.animated-arrow {
+  display: inline-block;
+  color: $textColour;
+  font-size: 20px;
+  font-style: italic;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.2s;
+
+  
+  &.hover {
+    color: $textColour;
+    
+    > .the-arrow.-left {
+      > .shaft {
+        width: $shaft-width;
+        transition-delay: 0.1s;
+        background-color: $textColour;
+
+        &:before,
+        &:after {
+          width: $arrow-head-width;
+          transition-delay: 0.1s;
+          background-color: $textColour;
+        }
+
+        &:before {
+          transform: rotate(40deg);
+        }
+
+        &:after {
+          transform: rotate(-40deg);
+        }
+      }
+    }
+    
+    > .main {
+      transform: translateX($shaft-width + $text-arrow-space);
+      
+      > .the-arrow.-right {
+        > .shaft {
+          width: 0;
+          transform: translateX(200%);
+          transition-delay: 0;
+          
+          &:before,
+          &:after {
+            width: 0;
+            transition-delay: 0;
+            transition: all 0.1s;
+          }
+
+          &:before {
+            transform: rotate(0);
+          }
+
+          &:after {
+            transform: rotate(0);
+          }
+        }
+      }
+    }
+  }
+  
+  > .main {
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    
+    > .text {
+      margin: 0 $text-arrow-space 0 0;
+      line-height: 1;
+    }
+    
+    > .the-arrow {
+      position: relative;
+    }
+  }
+}
+
+.arrow-link {
+  color: $textColour;
+  position: absolute;
+  right: 5%;
+  top: 90%;
+
+  a {
+    cursor: none;
+    color: inherit;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+.about-overlay .arrow-link {
+  opacity: 0;
+  color: $backgroundColour;
+  .the-arrow {    
+    &.-left {
+      > .shaft {
+        background-color: $backgroundColour;
+        
+        &:before,
+        &:after {
+          background-color: $backgroundColour;
+        }
+      }
+    }
+    > .shaft {
+      background-color: $backgroundColour;
+      &:before,
+      &:after {
+        background-color: $backgroundColour;
+      }
+    }
+  }
+  .animated-arrow {
+    color: $backgroundColour;
+    
+    &.hover {
+      color: $backgroundColour;
+      
+      > .the-arrow.-left {
+        > .shaft {
+          background-color: $backgroundColour;
+
+          &:before,
+          &:after {
+            background-color: $backgroundColour;
+          }
+        }
+      }
+    }
+  }
+}
