@@ -45,6 +45,7 @@
 }
 
 .about-overlay .name {
-    color: $backgroundColour;
+    color: $textColour;
+    mix-blend-mode: difference;
     opacity: 0.9;
 }

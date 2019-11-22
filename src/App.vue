@@ -104,7 +104,7 @@ export default {
       setTimeout(() => {
         this.currentIndex = val === this.projectTitles.length ? 0 : val;
         window.scrollTo(0, 0);
-      }, 1800)
+      }, 1600)
       setTimeout(() => {
         this.projectView = true;
       }, 2000)

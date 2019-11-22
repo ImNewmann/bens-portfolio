@@ -35,6 +35,7 @@
         &:after {
             opacity: 0;
             content: '';
+            mix-blend-mode: difference;
             position: absolute;
             top: 0;
             right: -12px;

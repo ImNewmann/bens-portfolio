@@ -12,9 +12,11 @@
         visibility: hidden;
         width: 100%;
         height: 100%;
-        background-position: 10%;
-        background-size: contain;
+        background-position: 30%;
+        background-size: cover;
+        
         @include breakpoint(tablet) {
+            background-position: 25%;
             background-size: cover;
         }
         @include breakpoint(desktop) {
@@ -29,7 +31,7 @@
         top: 50%;
         transform: translateY(-50%);
         transform-origin: center;
-        width: 60%;
+        width: 56%;
 
         @include breakpoint(tablet) {
             background-color: transparent;
@@ -46,7 +48,7 @@
                 color: $backgroundColour;
                 line-height: 1.4;
                 font-weight: 700;
-                font-size: 20px;
+                font-size: 3vh;
 
                 @include breakpoint(tablet) {
                     opacity: 0.95;
@@ -64,7 +66,7 @@
                 text-decoration: none;
                 -webkit-text-stroke: $backgroundColour 1px;
                 color: transparent;
-                font-size: 26px;
+                font-size: 3.5vh;
                 font-weight: 700;
                 display: inline-block;
                 position: relative;
@@ -74,7 +76,6 @@
                 transition: transform 0.4s $bezierCurve, color 0.4s $bezierCurve;
 
                 @include breakpoint(tablet) {
-                    font-size: 3.5vw;
                     left: 0;
                     transform: translateX(5%) skew(-15deg);
                 }

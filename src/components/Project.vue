@@ -113,12 +113,6 @@ export default {
     projects: projectData,
   }),
 
-  updated() {
-    this.resetNextProjectStyles(this.$refs)
-    this.initObserver('.image', this.fadeIn, 200, 0.25)
-    this.initObserver('.about-project ul', this.fadeIn, 200, 1)
-  },
-
   mounted () {
     vhCheck()
     this.initObserver('.image', this.fadeIn, 200, 0.25)
@@ -195,6 +189,9 @@ export default {
         .to(nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0.8)
         .to(heightBlock, 0.6, { transform: 'translateY(1px)', ease: Power3.easeOut }, 1.2) // HEIGHT
         .eventCallback("onComplete", () => {
+          this.resetNextProjectStyles(this.$refs)
+          this.initObserver('.image', this.fadeIn, 200, 0.25)
+          this.initObserver('.about-project ul', this.fadeIn, 200, 1)
           this.animationActive = false;
           html.style.overflow = 'inherit'
         });

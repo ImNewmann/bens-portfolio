@@ -1,5 +1,8 @@
 .cursor {
-
+    visibility: hidden;
+    @include breakpoint(desktop) {
+        visibility: visible;
+    }
     &__inner,
     &__outer {
         opacity: 0;
