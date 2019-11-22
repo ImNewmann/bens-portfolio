@@ -9,7 +9,7 @@
 import { TweenMax } from 'gsap/TweenMax'
 
 export default {
-  name: 'Cursor',
+  name: 'CustomCursor',
   props: {
     onLink: Boolean,
   },

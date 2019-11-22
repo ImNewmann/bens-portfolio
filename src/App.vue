@@ -117,13 +117,13 @@ export default {
     toggleAboutView() {
       if (this.aboutView === false) {
         vhCheck({force: true})
-        this.handleNavAnimations(0, 2200);
+        this.handleNavAnimations(0, 1800);
         this.isOnLink = false;
         this.aboutView = true
       } else if (this.aboutView === true) {
           this.isOnLink = false;
-          this.handleNavAnimations(200, 2400);
-          setTimeout(() => this.aboutView = false, 2400)
+          this.handleNavAnimations(200, 2000);
+          setTimeout(() => this.aboutView = false, 1900)
       }
     },
     handleLinkAnimations() {

@@ -83,8 +83,8 @@
 </template>
 <script>
 import { TweenMax, TimelineMax, Power3 } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import 'intersection-observer' //Polyfill
-import "gsap/ScrollToPlugin";
 import ProjectBackground from "./ProjectBackground";
 import Title from "./Title";
 import ArrowLink from './ArrowLink'
@@ -181,12 +181,14 @@ export default {
       const nextProjectBG = projectFooter.childNodes[1];
       const nextProjectBGScale = nextProjectBG.childNodes[0];
       const heightBlock = components.heightBlock;
+      const scrollPlugin = ScrollToPlugin;
+
       const tl = new TimelineMax();
       vhCheck({force: true})
       this.animationActive = true;
       this.$emit("projectClicked", this.currentIndex + 1);
 
-      tl.to(window, 5, {scrollTo: document.body.scrollHeight}, {ease: Power3.easeOut}, 0)
+      tl.to(window, 5, {scrollTo: document.body.scrollHeight}, 0)
         .set(html, {overflow: 'hidden'}, 0.2)
         .to(nextProjectBGScale, 1.4, { scale: 1, autoAlpha: 1, rotation: 0, ease: Power3.easeOut }, 0.2)
         .to(nextProjectBG, 1.4, { autoAlpha: 0.9, ease: Power3.easeOut }, 0.2)
