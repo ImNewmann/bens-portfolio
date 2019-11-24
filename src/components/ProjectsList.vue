@@ -7,8 +7,8 @@
       class="projects-list__link link"
       @click="() => { animateContent('out') }"
       v-on="!touchDevice ? { 
-                mouseover: () => { handleHover(this.$refs, 'over')},
-                mouseleave: () => { handleHover(this.$refs, 'leave')}
+                mouseover: () => { handleHover(this.animElems, 'over')},
+                mouseleave: () => { handleHover(this.animElems, 'leave')}
             } : {}"
     >
       <Title ref="currentTitle" showBase :text="currentProjectTitle" />
@@ -65,26 +65,65 @@ export default {
         image2: this.projectImage[1],
         image2Active: false
       },
-      touchStartVal: 0
+      touchStartVal: 0,
+      animElems: {},
     };
   },
 
   mounted() {
+    this.animElems = this.getAnimatableElements(this.$refs);
     this.updateProject();
-    vhCheck();
+    vhCheck({force: true});
   },
 
   methods: {
+    getAnimatableElements(refs) {
+      const currentTitleBase = refs.currentTitle.$el.children[0];
+      const currentTitleOutline = refs.currentTitle.$el.children[1];
+      const currentProjectImage = refs.currentProjectImage.$el;
+      const prevTitle = refs.titlePrev.$el.children[0];
+      const nextTitle = refs.titleNext.$el.children[0];
+      const projectList = refs.projectList;
+      const heightBlock = refs.heightBlock
+      const counter = refs.counter.$el;
+      const backgrounds = {
+        wrapper: {
+          bg1: refs.backgroundImage1.$el,
+          bg2: refs.backgroundImage2.$el
+        },
+        clear: {
+          bg1: refs.backgroundImage1.$el.childNodes[0],
+          bg2: refs.backgroundImage2.$el.childNodes[0]
+        },
+        blur: {
+          bg1: refs.backgroundImage1.$el.childNodes[1],
+          bg2: refs.backgroundImage2.$el.childNodes[1]
+        },
+      }
+
+      return {
+        currentTitleBase,
+        currentTitleOutline,
+        currentProjectImage,
+        prevTitle,
+        nextTitle,
+        backgrounds,
+        projectList,
+        counter,
+        heightBlock
+      }
+    },
+
     updateProject() {
       if (this.next === true) {
         this.handleBackgrounds("down");
-        this.animateProjectTitles(this.$refs, "down");
-        this.animateProjectImage(this.$refs, "down");
+        this.animateProjectTitles(this.animElems, "down");
+        this.animateProjectImage(this.animElems, "down");
         this.currentIndex += 1;
       } else if (this.prev === true) {
         this.handleBackgrounds("up");
-        this.animateProjectTitles(this.$refs, "up");
-        this.animateProjectImage(this.$refs, "up");
+        this.animateProjectTitles(this.animElems, "up");
+        this.animateProjectImage(this.animElems, "up");
         this.currentIndex -= 1;
       }
 
@@ -169,108 +208,96 @@ export default {
       }
       this.backgroundImages.image1Active = !this.backgroundImages.image1Active;
       this.backgroundImages.image2Active = !this.backgroundImages.image2Active;
-      this.animateBackground(this.$refs);
+      this.animateBackground(this.animElems);
     },
 
     handleHover(components, action) {
-      const currentTitleBase = components.currentTitle.$el.children[0];
-      const currentTitleOutline = components.currentTitle.$el.children[1];
-      const currentProjectImage = components.currentProjectImage.$el;
-      const prevTitle = components.titlePrev.$el.children[0];
-      const nextTitle = components.titleNext.$el.children[0];
-      const backgroundImage = this.backgroundImages.image1Active
-        ? components.backgroundImage1.$el.childNodes[1]
-        : components.backgroundImage2.$el.childNodes[1];
+      const backgroundImage = this.backgroundImages.image1Active ? components.backgrounds.blur.bg1 : components.backgrounds.blur.bg2
       const hoverTL = new TimelineMax();
 
       if (!this.hoverActive && action === "over") {
         this.hoverActive = true;
         hoverTL
-          .to(currentTitleBase, 0.4, { scale: 1.1, ease: Power3.easeOut }, 0)
-          .to(currentTitleOutline, 0.4, { scale: 1.1, ease: Power3.easeOut }, 0)
-          .to(currentProjectImage, 0.8, { scale: 1.1, ease: Power3.easeOut }, 0)
-          .to(prevTitle, 0.4, { yPercent: -50, autoAlpha: 0, ease: Power3.easeOut }, 0)
-          .to(nextTitle, 0.4, { yPercent: 50, autoAlpha: 0, ease: Power3.easeOut }, 0)
+          .to(components.currentTitleBase, 0.4, { scale: 1.1, ease: Power3.easeOut }, 0)
+          .to(components.currentTitleOutline, 0.4, { scale: 1.1, ease: Power3.easeOut }, 0)
+          .to(components.currentProjectImage, 0.8, { scale: 1.1, ease: Power3.easeOut }, 0)
+          .to(components.prevTitle, 0.4, { yPercent: -50, autoAlpha: 0, ease: Power3.easeOut }, 0)
+          .to(components.nextTitle, 0.4, { yPercent: 50, autoAlpha: 0, ease: Power3.easeOut }, 0)
           .to(backgroundImage, 0.4, { filter: "grayscale(0.7)" }, 0);
       } else if (this.hoverActive && action === "leave") {
         this.hoverActive = false;
         hoverTL
-          .to(currentTitleBase, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-          .to(currentTitleOutline, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-          .to(currentProjectImage, 0.8, { scale: 1, ease: Power3.easeOut }, 0)
-          .to(prevTitle, 0.4, { yPercent: 0, autoAlpha: 0.3, ease: Power3.easeOut }, 0)
-          .to(nextTitle, 0.4, { yPercent: 0, autoAlpha: 0.3, ease: Power3.easeOut }, 0)
+          .to(components.currentTitleBase, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
+          .to(components.currentTitleOutline, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
+          .to(components.currentProjectImage, 0.8, { scale: 1, ease: Power3.easeOut }, 0)
+          .to(components.prevTitle, 0.4, { yPercent: 0, autoAlpha: 0.3, ease: Power3.easeOut }, 0)
+          .to(components.nextTitle, 0.4, { yPercent: 0, autoAlpha: 0.3, ease: Power3.easeOut }, 0)
           .to(backgroundImage, 0.4, { filter: "grayscale(0)" }, 0);
       }
     },
 
     animateContent(action) { // being called from app.vue so couldn't pass refs as param
-      const currentTitleBase = this.$refs.currentTitle.$el.children[0];
-      const currentTitleOutline = this.$refs.currentTitle.$el.children[1];
-      const currentProjectImage = this.$refs.currentProjectImage.$el;
-      const prevTitle = this.$refs.titlePrev.$el.children[0];
-      const nextTitle = this.$refs.titleNext.$el.children[0];
-      const backgroundImage = this.backgroundImages.image1Active ? this.$refs.backgroundImage1.$el : this.$refs.backgroundImage2.$el;
-      const heightBlock = this.$refs.heightBlock
-      const counter = this.$refs.counter.$el;
-      const projectList = this.$refs.projectList;
+      const components = this.animElems
+      const backgroundImageWrapper = this.backgroundImages.image1Active ? components.backgrounds.wrapper.bg1 : components.backgrounds.wrapper.bg2
+      const backgroundImageClear = this.backgroundImages.image1Active ? components.backgrounds.clear.bg1 : components.backgrounds.clear.bg2
       const animateTL = new TimelineMax();
 
       if (action === "out") {
-        prevTitle.style.display = "none";
-        nextTitle.style.display = "none";
-        projectList.style.pointerEvents = "none";
+        components.prevTitle.style.display = "none";
+        components.nextTitle.style.display = "none";
+        components.projectList.style.pointerEvents = "none";
 
         this.removeScroll();
-        setTimeout(() => { this.handleHover(this.$refs, "leave") }, 200)
         this.$emit("projectClicked", this.currentIndex);
 
         const speed = 1
         const delay = 0.2
         animateTL
-        .to(currentProjectImage, 0.6 * speed, { autoAlpha: 0, xPercent: 10, ease: Power3.easeOut }, 0 + delay)
-        .to(currentTitleBase, 0.4 * speed, { autoAlpha: 0, ease: Power3.easeOut }, 0.2 + delay)
-        .to(backgroundImage, 1.8 * speed, { scale: 1, autoAlpha: 0.9, ease: Power3.easeOut }, 0.2 + delay) // BG SCALE
-        .to(backgroundImage.childNodes[0], 1.2 * speed, { autoAlpha: 1, ease: Power3.easeOut}, 0.2 + delay) //BLUR OUT
-        .to(counter, 0.4 * speed, { autoAlpha: 0, ease: Power3.easeOut }, 0.2 + delay)
-        .to(currentTitleBase, 1.2 * speed, { autoAlpha: 1, ease: Power3.easeOut }, 1.2 + delay) // TITLE FILL
-        .to(heightBlock, 0.6 * speed, { transform: 'translateY(1px)', ease: Power3.easeOut }, 1.6 + delay) // HEIGHT
+        .to(components.currentTitleBase, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
+        .to(components.currentTitleOutline, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
+        .to(components.currentProjectImage, 0.6 * speed, { autoAlpha: 0, xPercent: 10, ease: Power3.easeOut }, 0 + delay)
+        .to(components.currentTitleBase, 0.4 * speed, { autoAlpha: 0, scale: 1, ease: Power3.easeOut }, 0.2 + delay)
+        .to(backgroundImageWrapper, 1.2 * speed, { autoAlpha: 0.9, ease: Power3.easeOut }, 0.2 + delay) // BG SCALE
+        .to(backgroundImageClear, 1.8 * speed, { scale: 1, autoAlpha: 1, ease: Power3.easeOut}, 0.2 + delay) //BLUR OUT
+        .to(components.counter, 0.4 * speed, { autoAlpha: 0, ease: Power3.easeOut }, 0.2 + delay)
+        .to(components.currentTitleBase, 1.2 * speed, { autoAlpha: 1, ease: Power3.easeOut }, 1.2 + delay) // TITLE FILL
+        .to(components.heightBlock, 0.6 * speed, { transform: 'translateY(1px)', ease: Power3.easeOut }, 1.6 + delay) // HEIGHT
 
       } else if (action === "in") {
         const speed = 1;
         const delay = 1.5;
         animateTL
-        .fromTo(currentTitleBase, 0.4 * speed,
+        .fromTo(components.currentTitleBase, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -50, xPercent: -10},
             { autoAlpha: 1, yPercent: -50, xPercent: 0, ease: Power3.easeOut }, 0.1 + delay)
-        .fromTo(currentTitleOutline, 0.4 * speed,
+        .fromTo(components.currentTitleOutline, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -50, xPercent: -10},
             { autoAlpha: 1, yPercent: -50, xPercent: 0, ease: Power3.easeOut }, 0.1 + delay)
-        .fromTo(currentProjectImage, 0.4 * speed, 
+        .fromTo(components.currentProjectImage, 0.4 * speed, 
             { autoAlpha: 0.001, yPercent: -50, xPercent: `${this.touchDevice ? 15 : 20}`, skewX: -12}, 
             { autoAlpha: 1, yPercent: -50, xPercent: 0, skewX: 0, ease: Power3.easeOut }, 0.3 + delay)
-        .fromTo(prevTitle, 0.4 * speed,
+        .fromTo(components.prevTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -100, skewX: -20, skewY: -20 },
             { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.5 + delay)
-        .fromTo(nextTitle, 0.4 * speed,
+        .fromTo(components.nextTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 100, skewX: -20, skewY: 20 },
             { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.5 + delay)
-        .fromTo(counter, 0.4 * speed,
+        .fromTo(components.counter, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 50 },
             { autoAlpha: 1, yPercent: 0, ease: Power3.easeOut }, 0.5 + delay)
-        .fromTo(backgroundImage, 1 * speed,
-            { autoAlpha: 0.001 },
+        .fromTo(backgroundImageWrapper, 1 * speed,
+            { autoAlpha: 0 },
             { autoAlpha: 0.7 }, 0.9 + delay)
         setTimeout(() => {
-          projectList.style.pointerEvents = "all";
+          components.projectList.style.pointerEvents = "all";
           this.scroll();
         }, 2500)
       }
     },
 
     animateBackground(components) {
-      const backgroundImage1 = components.backgroundImage1.$el;
-      const backgroundImage2 = components.backgroundImage2.$el;
+      const backgroundImage1 = components.backgrounds.wrapper.bg1;
+      const backgroundImage2 = components.backgrounds.wrapper.bg2;
       const startingPointBG = this.backgroundImages.image1Active ? backgroundImage2 : backgroundImage1;
       const endingPointBG = this.backgroundImages.image1Active ? backgroundImage1 : backgroundImage2;
       
@@ -279,27 +306,22 @@ export default {
     },
 
     animateProjectTitles(components, direction) {
-      const currentTitleBase = components.currentTitle.$el.children[0];
-      const currentTitleOutline = components.currentTitle.$el.children[1];
-      const prevTitle = components.titlePrev.$el.children[0];
-      const nextTitle = components.titleNext.$el.children[0];
-
-      TweenMax.from(currentTitleBase, 0.4, {
+      TweenMax.from(components.currentTitleBase, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
       });
-      TweenMax.from(currentTitleOutline, 0.4, {
+      TweenMax.from(components.currentTitleOutline, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
       });
-      TweenMax.from(prevTitle, 0.4, {
+      TweenMax.from(components.prevTitle, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
       });
-      TweenMax.from(nextTitle, 0.4, {
+      TweenMax.from(components.nextTitle, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
@@ -307,28 +329,25 @@ export default {
     },
 
     animateProjectImage(components) {
-      const currentProjectImage = components.currentProjectImage.$el;
-      const featuredImageTL = new TimelineMax({paused: true});
-      const projectList = components.projectList
+      const featuredImageTL = new TimelineMax();
 
-      TweenMax.set(projectList, {pointerEvents: 'none'})
-      TweenMax.set(projectList, {pointerEvents: 'all', delay: 1.4})
+      TweenMax.set(components.projectList, {pointerEvents: 'none'})
+      TweenMax.set(components.projectList, {pointerEvents: 'all', delay: 1.4})
 
-      featuredImageTL.to(currentProjectImage, 0.5,
+      featuredImageTL.to(components.currentProjectImage, 0.5,
           {
             autoAlpha: 0.01,
             xPercent: `${this.touchDevice ? 15 : 20}`,
             skewX: -12,
             ease: Power3.easeOut
           }, 0)
-        .to(currentProjectImage, 0.6,
+        .to(components.currentProjectImage, 0.6,
           {
             autoAlpha: 1,
             xPercent: 0,
             skewX: 0,
             ease: Power3.easeOut
           }, 0.7);
-        featuredImageTL.progress(1).progress(0).play()
     },
   }
 };

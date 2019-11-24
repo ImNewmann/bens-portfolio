@@ -40,10 +40,10 @@
     &__outline {
         position: absolute;
         opacity: 0;
-        top: 67%;
+        top: 65%;
         left: 8%;
-        transform: scale(1) translateZ(0);
-        will-change: transform;
+        transform: scale(1);
+        // will-change: transform;
 
         @include breakpoint(tablet) {
             top: 50%;
@@ -55,6 +55,7 @@
         color: $textColour;
         background-image: url('#{$assets-dir}noise.gif');
         background-clip: text;
+        z-index: 1;
 
     }
 

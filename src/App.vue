@@ -1,7 +1,7 @@
 // ACTIONS
 // THROTTLE INTERNET AND PERFORMANCE IN BROWSER
 <template>
-  <div id="app" :class="{'about-overlay': aboutView}">
+  <div id="app" ref="app" :class="{'about-overlay': aboutView}">
     <About v-if="aboutView" @toggleAboutView="toggleAboutView" :touchDevice="touchDevice" :aboutImageURL="aboutImage"/>
     <CustomCursor v-if="!touchDevice" :onLink="isOnLink" ref="Cursor"/>
     <NavLinks v-if="showNav" @aboutClicked="toggleAboutView" ref="navLinks" :aboutView="aboutView" :touchDevice="touchDevice"/>
@@ -17,8 +17,9 @@
     <Project
       :touchDevice="touchDevice"
       v-if="projectView"
-      @projectClicked="loadProjectView"
-      :currentIndex="currentIndex"
+      @updateIndex="updateIndexFromProj"
+      @projectClicked="() => { this.handleNavAnimations(200, 2000) }"
+      :index="currentIndex"
       :projectImage="projectImages[currentIndex]"
       :projectTitle="projectTitles[currentIndex]"
       :nextProjectImage="projectImages[currentIndex === this.projectTitles.length - 1 ? 0 : currentIndex + 1]"
@@ -100,14 +101,13 @@ export default {
     },
     loadProjectView(val) {
       this.isOnLink = false;
-      this.handleNavAnimations(this.listView ? 400 : 200, this.listView ? 2200 : 2000)
+      this.handleNavAnimations(400, 2200)
+      this.updateIndexFromProj(val);
+
       setTimeout(() => {
-        this.currentIndex = val === this.projectTitles.length ? 0 : val;
-        window.scrollTo(0, 0);
-      }, 1600)
-      setTimeout(() => {
-        this.projectView = true;
+        this.projectView = true
       }, 2000)
+
       setTimeout(() => {
         this.$refs.project.$el.style.opacity = '1'
         this.$refs.project.$el.style.visibility = 'visible'
@@ -125,6 +125,10 @@ export default {
           this.handleNavAnimations(200, 2000);
           setTimeout(() => this.aboutView = false, 1900)
       }
+    },
+    updateIndexFromProj(val) {
+      this.isOnLink = false
+      this.currentIndex = val === this.projectTitles.length ? 0 : val;
     },
     handleLinkAnimations() {
       const links = document.querySelectorAll(".link");

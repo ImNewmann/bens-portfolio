@@ -48,4 +48,8 @@
     color: $textColour;
     mix-blend-mode: difference;
     opacity: 0.9;
+
+    @supports not (mix-blend-mode: difference) {
+        color: $backgroundColour;
+    }
 }
