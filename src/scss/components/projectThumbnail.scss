@@ -4,8 +4,8 @@
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
     opacity: 0;  
     transform: scale(1) skew(0deg, 0deg);
-    will-change: transform;
-    z-index: 1;
+    will-change: transform, opacity;
+    z-index: 5;
 
     &__image {
         width: 100%;

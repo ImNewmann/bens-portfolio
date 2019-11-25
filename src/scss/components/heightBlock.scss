@@ -6,6 +6,7 @@
     background-color: $backgroundColour;
     transform: translateY(100%);
 
+    z-index: 6;
     @include breakpoint(tablet) {
         height: 10%;
     }

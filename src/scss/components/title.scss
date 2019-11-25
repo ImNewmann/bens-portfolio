@@ -56,14 +56,14 @@
         color: $textColour;
         background-image: url('#{$assets-dir}noise.gif');
         background-clip: text;
-        z-index: 1;
+        z-index: 5;
 
     }
 
     &__outline {
         color: transparent;
         -webkit-text-stroke: $textColour 1px;
-        z-index: 2;
+        z-index: 6;
     }
 }
 
