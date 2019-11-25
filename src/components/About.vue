@@ -46,7 +46,7 @@ export default {
         const delay = 0
         aboutTL.to(about, 0.6 * speed, {scaleY: 1, ease: Power3.easeOut}, 0 + delay)
             .to(aboutBG, 1 * speed, {autoAlpha: 1}, 0.4 + delay)
-            .from(aboutText, 0.6, {xPercent: 10, autoAlpha: 0, ease: Power3.easeOut}, 0.8 + delay)
+            .from(aboutText, 0.6, {xPercent: 10, scaleX: 1.2, autoAlpha: 0, ease: Power3.easeOut}, 0.8 + delay)
             .from(link, 0.6, {autoAlpha: 0, xPercent: -10, ease: Power3.easeOut}, 1 + delay)
         setTimeout(() => {
             backLink.animIn()

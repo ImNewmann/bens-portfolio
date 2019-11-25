@@ -15,24 +15,26 @@
 
     &--prev .title__outline {
         top: -1%;
+
         @include breakpoint(tablet) {
-            top: 0;
+            top: 0%
         }
 
         @include breakpoint(desktop) {
-            top: -10%;
+            top: -6%;
         } 
     }
 
     &--next .title__outline {
         top: inherit;
         bottom: -1%;
+
         @include breakpoint(tablet) {
-            bottom: 0;
+            bottom: 0%
         }
 
         @include breakpoint(desktop) {
-            bottom: -10%;
+            bottom: -6%;
         } 
     }
 
@@ -43,7 +45,6 @@
         top: 65%;
         left: 8%;
         transform: scale(1);
-        // will-change: transform;
 
         @include breakpoint(tablet) {
             top: 50%;

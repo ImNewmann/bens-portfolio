@@ -88,13 +88,11 @@
     height: 100vh;
     .project-background {
       overflow: hidden;
-      opacity: 0.6;
+      opacity: 0.7;
       visibility: visible;
 
       &__item {
-        transform: scale(2) translateZ(0);
-        will-change: transform;
-        backface-visibility: hidden;
+        transform: scale(2);
       }
     }
   }

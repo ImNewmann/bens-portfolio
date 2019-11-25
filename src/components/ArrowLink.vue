@@ -46,7 +46,7 @@ export default {
         animOut () {
           const arrowLinkContainer = this.$refs.arrowLinkContainer
           const tl = new TimelineMax()
-          tl.to(arrowLinkContainer, 0.2, { xPercent: -10, ease: Power3.easeOut }, 0)
+          tl.to(arrowLinkContainer, 0.4, { xPercent: -10, ease: Power3.easeOut }, 0)
             .to(arrowLinkContainer, 0.7, { autoAlpha: 0, xPercent: 50, ease: Power3.easeOut }, 0.2)
         },
 

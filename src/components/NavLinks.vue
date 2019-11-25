@@ -41,7 +41,7 @@ export default {
             const navLinks = this.$refs.navLinks
             const name = this.$refs.name
             setTimeout(() => { 
-                TweenMax.to(navLinks, 0.4, {autoAlpha: 1, transform: 'translateX(0)', ease: Power3.easeOut})
+                TweenMax.fromTo(navLinks, 0.4, {autoAlpha: 0, xPercent: 50, skewX: -16}, {autoAlpha: 1, xPercent: 0, skewX: 0, ease: Power3.easeOut})
                 name.fadeIn() 
             }, delay);
         },
@@ -49,7 +49,7 @@ export default {
         animOut() {
             const navLinks = this.$refs.navLinks
             const name = this.$refs.name
-            TweenMax.to(navLinks, 0.4, {autoAlpha: 0, transform: 'translateX(100%)', ease: Power3.easeOut}, 0)
+            TweenMax.to(navLinks, 0.4, {autoAlpha: 0, xPercent: 50, skewX: -16, ease: Power3.easeOut}, 0)
             name.fadeOut();
         }
     }

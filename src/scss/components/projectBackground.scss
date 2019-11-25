@@ -16,14 +16,12 @@
         background-position: center;
         background-size: cover;
         z-index: 1;
-        // will-change: transform, opacity;
-        
+
         &.blur {
             z-index: 0;
             visibility: visible;
             opacity: 1;
             filter: grayscale(0);
-            // backface-visibility: hidden;
         }
     }
 }

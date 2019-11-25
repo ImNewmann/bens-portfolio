@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { TweenMax, TimelineMax, Power3 } from "gsap";
+import { TimelineMax, Power3 } from "gsap";
 import ProjectThumbnail from "./ProjectThumbnail";
 import ProjectBackground from "./ProjectBackground";
 import Title from "./Title";
@@ -223,7 +223,7 @@ export default {
           .to(components.currentProjectImage, 0.8, { scale: 1.1, ease: Power3.easeOut }, 0)
           .to(components.prevTitle, 0.4, { yPercent: -50, autoAlpha: 0, ease: Power3.easeOut }, 0)
           .to(components.nextTitle, 0.4, { yPercent: 50, autoAlpha: 0, ease: Power3.easeOut }, 0)
-          .to(backgroundImage, 0.4, { filter: "grayscale(0.7)" }, 0);
+          .to(backgroundImage, 0.4, { filter: "grayscale(0.8)" }, 0);
       } else if (this.hoverActive && action === "leave") {
         this.hoverActive = false;
         hoverTL
@@ -255,7 +255,7 @@ export default {
         animateTL
         .to(components.currentTitleBase, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
         .to(components.currentTitleOutline, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-        .to(components.currentProjectImage, 0.6 * speed, { autoAlpha: 0, xPercent: 10, ease: Power3.easeOut }, 0 + delay)
+        .to(components.currentProjectImage, 0.6 * speed, { autoAlpha: 0, skewX: -7, xPercent: 20, ease: Power3.easeOut }, 0 + delay)
         .to(components.currentTitleBase, 0.4 * speed, { autoAlpha: 0, scale: 1, ease: Power3.easeOut }, 0.2 + delay)
         .to(backgroundImageWrapper, 1.2 * speed, { autoAlpha: 0.9, ease: Power3.easeOut }, 0.2 + delay) // BG SCALE
         .to(backgroundImageClear, 1.8 * speed, { scale: 1, autoAlpha: 1, ease: Power3.easeOut}, 0.2 + delay) //BLUR OUT
@@ -267,27 +267,27 @@ export default {
         const speed = 1;
         const delay = 1.5;
         animateTL
-        .fromTo(components.currentTitleBase, 0.4 * speed,
-            { autoAlpha: 0.001, yPercent: -50, xPercent: -10},
-            { autoAlpha: 1, yPercent: -50, xPercent: 0, ease: Power3.easeOut }, 0.1 + delay)
-        .fromTo(components.currentTitleOutline, 0.4 * speed,
-            { autoAlpha: 0.001, yPercent: -50, xPercent: -10},
-            { autoAlpha: 1, yPercent: -50, xPercent: 0, ease: Power3.easeOut }, 0.1 + delay)
         .fromTo(components.currentProjectImage, 0.4 * speed, 
-            { autoAlpha: 0.001, yPercent: -50, xPercent: `${this.touchDevice ? 15 : 20}`, skewX: -12}, 
-            { autoAlpha: 1, yPercent: -50, xPercent: 0, skewX: 0, ease: Power3.easeOut }, 0.3 + delay)
+            { autoAlpha: 0.001, yPercent: -50, xPercent: `${this.touchDevice ? 15 : 20}`, skewX: -7}, 
+            { autoAlpha: 1, yPercent: -50, xPercent: 0, skewX: 0, ease: Power3.easeOut }, 0.1 + delay)
+        .fromTo(components.currentTitleBase, 0.4 * speed,
+            { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2, xPercent: -10},
+            { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
+        .fromTo(components.currentTitleOutline, 0.4 * speed,
+            { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2, xPercent: -10},
+            { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(components.prevTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -100, skewX: -20, skewY: -20 },
-            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.5 + delay)
+            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(components.nextTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 100, skewX: -20, skewY: 20 },
-            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.5 + delay)
+            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(components.counter, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 50 },
-            { autoAlpha: 1, yPercent: 0, ease: Power3.easeOut }, 0.5 + delay)
+            { autoAlpha: 1, yPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(backgroundImageWrapper, 1 * speed,
             { autoAlpha: 0 },
-            { autoAlpha: 0.7 }, 0.9 + delay)
+            { autoAlpha: 0.7 }, 0.7 + delay)
         setTimeout(() => {
           components.projectList.style.pointerEvents = "all";
           this.scroll();
@@ -300,45 +300,44 @@ export default {
       const backgroundImage2 = components.backgrounds.wrapper.bg2;
       const startingPointBG = this.backgroundImages.image1Active ? backgroundImage2 : backgroundImage1;
       const endingPointBG = this.backgroundImages.image1Active ? backgroundImage1 : backgroundImage2;
-      
-      TweenMax.to(startingPointBG, 1, { autoAlpha: 0, delay: 0.7 })
-      TweenMax.to(endingPointBG, 1, { autoAlpha: 0.7, delay: 0.7 });
+      const tl = new TimelineMax()
+      tl.to(startingPointBG, 1, { autoAlpha: 0}, 0.7)
+      tl.to(endingPointBG, 1, { autoAlpha: 0.7}, 0.7);
     },
 
     animateProjectTitles(components, direction) {
-      TweenMax.from(components.currentTitleBase, 0.4, {
+      const tl = new TimelineMax()
+      tl.from(components.currentTitleBase, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
-      });
-      TweenMax.from(components.currentTitleOutline, 0.4, {
+      }, 0)
+      .from(components.currentTitleOutline, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
-      });
-      TweenMax.from(components.prevTitle, 0.4, {
+      }, 0)
+      .from(components.prevTitle, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
-      });
-      TweenMax.from(components.nextTitle, 0.4, {
+      }, 0)
+      .from(components.nextTitle, 0.4, {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
         ease: Power3.easeOut
-      });
+      }, 0);
     },
 
     animateProjectImage(components) {
       const featuredImageTL = new TimelineMax();
 
-      TweenMax.set(components.projectList, {pointerEvents: 'none'})
-      TweenMax.set(components.projectList, {pointerEvents: 'all', delay: 1.4})
-
-      featuredImageTL.to(components.currentProjectImage, 0.5,
+      featuredImageTL.set(components.projectList, {pointerEvents: 'none'})
+      .to(components.currentProjectImage, 0.5,
           {
             autoAlpha: 0.01,
             xPercent: `${this.touchDevice ? 15 : 20}`,
-            skewX: -12,
+            skewX: -7,
             ease: Power3.easeOut
           }, 0)
         .to(components.currentProjectImage, 0.6,
@@ -347,7 +346,8 @@ export default {
             xPercent: 0,
             skewX: 0,
             ease: Power3.easeOut
-          }, 0.7);
+          }, 0.7)
+        .set(components.projectList, {pointerEvents: 'all'}, 1.4)
     },
   }
 };

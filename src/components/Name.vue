@@ -43,13 +43,13 @@ export default {
         },
         fadeOut () {
             const { name } = this.$refs
-            TweenMax.to(name, 0.4, {autoAlpha: 0, x: -50, ease: Power3.easeOut}, 0)
+            TweenMax.to(name, 0.4, {autoAlpha: 0, x: -50, skewX: 16, ease: Power3.easeOut}, 0)
         },
         fadeIn () {
             const { name } = this.$refs
             TweenMax.fromTo(name, 0.4, 
-                {autoAlpha: 0, x: -50},
-                {autoAlpha: 0.9, x: 0, ease: Power3.easeOut}, 0)
+                {autoAlpha: 0, x: -50, skewX: 16},
+                {autoAlpha: 0.9, x: 0, skewX: 0, ease: Power3.easeOut}, 0)
         }
     }
 }

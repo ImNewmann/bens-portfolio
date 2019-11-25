@@ -1,5 +1,3 @@
-// ACTIONS
-// THROTTLE INTERNET AND PERFORMANCE IN BROWSER
 <template>
   <div id="app" ref="app" :class="{'about-overlay': aboutView}">
     <About v-if="aboutView" @toggleAboutView="toggleAboutView" :touchDevice="touchDevice" :aboutImageURL="aboutImage"/>
@@ -18,7 +16,7 @@
       :touchDevice="touchDevice"
       v-if="projectView"
       @updateIndex="updateIndexFromProj"
-      @projectClicked="() => { this.handleNavAnimations(200, 2000) }"
+      @projectClicked="() => { this.handleNavAnimations(200, 1800) }"
       :index="currentIndex"
       :projectImage="projectImages[currentIndex]"
       :projectTitle="projectTitles[currentIndex]"

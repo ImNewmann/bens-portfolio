@@ -4,13 +4,13 @@ html {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    height: 100%;
+    scrollbar-width: none;
+
 }
 
 body {
     overscroll-behavior-y: contain;
     background-color: $backgroundColour;
-    height: 100%;
 
     &:after {
         position: fixed;

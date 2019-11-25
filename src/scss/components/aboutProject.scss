@@ -27,6 +27,7 @@
       ul {
         opacity: 0;
         margin-bottom: 20px;
+        will-change: transform;
 
         @include breakpoint(tablet) {
           margin-bottom: 0;

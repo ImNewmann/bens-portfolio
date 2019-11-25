@@ -83,7 +83,6 @@
 </template>
 <script>
 import { TweenMax, TimelineMax, Power3 } from "gsap";
-// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import 'intersection-observer' //Polyfill
 import ProjectBackground from "./ProjectBackground";
 import Title from "./Title";
@@ -136,13 +135,14 @@ export default {
   mounted () {
     vhCheck()
     this.animElems = this.getAnimatableElements(this.$refs)
-    this.initObserver('.image', this.fadeIn, 200, 0.25)
-    this.initObserver('.about-project ul', this.fadeIn, 200, 1)
+    this.initObserver('.image', this.fadeIn, 200, 0.25, false)
+    this.initObserver('.about-project ul', this.fadeIn, 200, 1, true)
+    this.initObserver('.about-project__visit-link', this.fadeIn, 200, 1, true)
   },
 
   methods: {
     getAnimatableElements (refs) {
-      const html = document.querySelector('html')
+      const body = document.querySelector('body')
       const { projectFooter } = refs;
       const nextProjectTitle = projectFooter.childNodes[0].childNodes[0];
       const nextProjectBG = projectFooter.childNodes[1];
@@ -151,7 +151,7 @@ export default {
       const heightBlock = refs.heightBlock;
 
       return {
-        html,
+        body,
         nextProjectTitle,
         nextProjectBG,
         nextProjectBGScale,
@@ -160,7 +160,7 @@ export default {
       }
     },
 
-    initObserver(targetElements, cb, y, t) {
+    initObserver(targetElements, cb, y, t, isText) {
       const targets = document.querySelectorAll(targetElements)
       const options = {
         root: null,
@@ -170,23 +170,23 @@ export default {
       targets.forEach(target => {
         const observer = new IntersectionObserver((entries, observer) => {
           if (entries[0].intersectionRatio < options.threshold) return
-          cb(target, y)
+          cb(target, y, isText)
           observer.disconnect();
         }, options); 
         observer.observe(target)
       })
     },
 
-    fadeIn(el, y) {
+    fadeIn(el, y, isText) {
       TweenMax.fromTo(el, 1.4,
-          { autoAlpha: 0, y: y },
-          { autoAlpha: 1, y: 0, ease: Power3.easeOut })
+          { autoAlpha: 0, y: y, scaleY: isText ? 1.5 : 1 },
+          { autoAlpha: 1, y: 0, scaleY: 1, ease: Power3.easeOut })
     },
 
     resetNextProjectStyles(components) {
       const images = document.querySelectorAll('.image')
       const listItems = document.querySelectorAll('.about-project ul')
-
+      
       TweenMax.set(components.nextProjectBGScale, { scale: 2, autoAlpha: 0 });
       TweenMax.set(components.nextProjectBG, { autoAlpha: 0.6, height: "100vh" });
       TweenMax.set(components.nextProjectTitle, { autoAlpha: 0 });
@@ -203,13 +203,13 @@ export default {
     },
 
     animateOut(components) {
-      // const scrollPlugin = ScrollToPlugin;
       const tl = new TimelineMax();
 
       this.animationActive = true;
       this.$emit("projectClicked");
       window.scroll(0, document.body.scrollHeight)
-      tl.set(components.html, {overflow: 'hidden'}, 0.2)
+      tl
+        .set(components.body, {overflow: 'hidden'}, 0.2)
         .to(components.nextProjectBGScale, 1.4, { scale: 1, autoAlpha: 1, rotation: 0, ease: Power3.easeOut }, 0.2)
         .to(components.nextProjectBG, 1.4, { autoAlpha: 0.9, ease: Power3.easeOut }, 0.2)
         .to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0.8)
@@ -221,12 +221,13 @@ export default {
     },
 
     handleNextHover(components, action) {
+      const tl = new TimelineMax();
       if (action === "over" && !this.animationActive) {
-        TweenMax.to(components.nextProjectBGScale, 0.8, { rotation: 7, scale: 2.2, autoAlpha: 1, ease: Power3.easeOut }, 0);
-        TweenMax.to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0);
+        tl.to(components.nextProjectBGScale, 0.8, { rotation: 7, scale: 2.2, autoAlpha: 1, ease: Power3.easeOut }, 0);
+        tl.to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0);
       } else if (action === "leave" && !this.animationActive) {
-        TweenMax.to(components.nextProjectBGScale, 0.8, { rotation: 0, scale: 2, autoAlpha: 0, ease: Power3.easeOut }, 0);
-        TweenMax.to(components.nextProjectTitle, 1, { autoAlpha: 0, ease: Power3.easeOut }, 0);
+        tl.to(components.nextProjectBGScale, 0.8, { rotation: 0, scale: 2, autoAlpha: 0, ease: Power3.easeOut }, 0);
+        tl.to(components.nextProjectTitle, 1, { autoAlpha: 0, ease: Power3.easeOut }, 0);
       }
     },
 
@@ -245,10 +246,10 @@ export default {
         this.nextProjTitle = this.nextProjectTitle
         this.resetNextProjectStyles(this.animElems);
         this.$nextTick(() => {
-          this.initObserver('.image', this.fadeIn, 200, 0.25)
-          this.initObserver('.about-project ul', this.fadeIn, 200, 1)
+          this.initObserver('.image', this.fadeIn, 200, 0.25, false)
+          this.initObserver('.about-project ul', this.fadeIn, 200, 1, true)
           this.animationActive = false;
-          this.animElems.html.style.overflow = 'inherit'
+          this.animElems.body.style.overflow = 'inherit'
         })
       }, 350)
     }
