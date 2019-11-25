@@ -78,6 +78,11 @@
     &__header,
     &__footer {
         .title {
+            &:not(.title--prev):not(.title--next) {
+                .title__base, .title__outline {
+                    will-change: auto;
+                }
+            }
 
             &__base,
             &__outline {
@@ -87,6 +92,10 @@
             }
         }
     }
+
+    // &__header {
+
+    // }
 
     &__footer {
         .title {
