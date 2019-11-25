@@ -284,7 +284,7 @@ export default {
             { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(components.counter, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 50 },
-            { autoAlpha: 1, yPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
+            { autoAlpha: 1, yPercent: 0, ease: Power3.easeOut }, 0.7 + delay)
         .fromTo(backgroundImageWrapper, 1 * speed,
             { autoAlpha: 0 },
             { autoAlpha: 0.7 }, 0.7 + delay)

@@ -65,6 +65,12 @@
         -webkit-text-stroke: $textColour 1px;
         z-index: 6;
     }
+
+    &:not(.title--prev):not(.title--next) {
+        .title__base, .title__outline {
+            will-change: transform, opacity;
+        }
+    }
 }
 
 .project {

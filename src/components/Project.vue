@@ -181,6 +181,9 @@ export default {
       TweenMax.fromTo(el, 1.4,
           { autoAlpha: 0, y: y, scaleY: isText ? 1.5 : 1 },
           { autoAlpha: 1, y: 0, scaleY: 1, ease: Power3.easeOut })
+          .eventCallback('onComplete', () => {
+            el.style.willChange = 'auto'
+          })
     },
 
     resetNextProjectStyles(components) {

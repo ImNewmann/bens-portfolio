@@ -48,7 +48,8 @@
     }
 
     .image {
-      opacity: 0.001;
+      opacity: 0;
+      will-change: opacity;
       box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
       transform: translateZ(0.1px);
 
