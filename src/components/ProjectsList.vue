@@ -271,10 +271,10 @@ export default {
             { autoAlpha: 0.001, yPercent: -50, xPercent: `${this.touchDevice ? 15 : 20}`, skewX: -7}, 
             { autoAlpha: 1, yPercent: -50, xPercent: 0, skewX: 0, ease: Power3.easeOut }, 0.1 + delay)
         .fromTo(components.currentTitleBase, 0.4 * speed,
-            { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2, xPercent: -10},
+            { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2},
             { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(components.currentTitleOutline, 0.4 * speed,
-            { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2, xPercent: -10},
+            { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2},
             { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
         .fromTo(components.prevTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -100, skewX: -20, skewY: -20 },
