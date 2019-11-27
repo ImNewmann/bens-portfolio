@@ -82,7 +82,7 @@
       }
 
       &:hover {
-        transform: translateX(-20px) skewX(0deg);
+        transform: translateX(-20px) skewX(0deg) !important;
         color: $textColour;
       }
     }

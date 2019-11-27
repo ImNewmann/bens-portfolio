@@ -55,7 +55,7 @@ export default [
         role: "Front End Developer",
         year: "Aug 2017 - Aug 2019",
         technology: ["Vue.js", "BEM", "Qubit", "Optimizely"],
-        description: "At Jet2 I worked within a large team to deliver the new jet2holidays.com website. The website draws in milions of visits a month, so the emphasis was on building something that was scalable and reusable, as we continued to test and develop features post-launch.",
+        description: "At Jet2 I worked within a large team to deliver the new jet2holidays.com website. The website draws in millions of visits a month, so the emphasis was on building something that was scalable and reusable, as we continued to test and develop features post-launch.",
         link: "http://www.jet2holidays.com",
         logo: [
             require("../assets/images/jet2/jet2logo.png"),

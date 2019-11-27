@@ -251,6 +251,7 @@ export default {
         this.$nextTick(() => {
           this.initObserver('.image', this.fadeIn, 200, 0.25, false)
           this.initObserver('.about-project ul', this.fadeIn, 200, 1, true)
+          this.initObserver('.about-project__visit-link', this.fadeIn, 200, 1, true)
           this.animationActive = false;
           this.animElems.body.style.overflow = 'inherit'
         })
