@@ -226,11 +226,11 @@ export default {
     handleNextHover(components, action) {
       const tl = new TimelineMax();
       if (action === "over" && !this.animationActive) {
-        tl.to(components.nextProjectBGScale, 0.8, { rotation: 7, scale: 2.2, autoAlpha: 1, ease: Power3.easeOut }, 0);
-        tl.to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0);
+        tl.to(components.nextProjectBGScale, 0.8, { rotation: 7, scale: 2.2, autoAlpha: 1, ease: Power3.easeOut }, 0)
+          .to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0);
       } else if (action === "leave" && !this.animationActive) {
-        tl.to(components.nextProjectBGScale, 0.8, { rotation: 0, scale: 2, autoAlpha: 0, ease: Power3.easeOut }, 0);
-        tl.to(components.nextProjectTitle, 1, { autoAlpha: 0, ease: Power3.easeOut }, 0);
+        tl.to(components.nextProjectBGScale, 0.8, { rotation: 0, scale: 2, autoAlpha: 0, ease: Power3.easeOut }, 0)
+          .to(components.nextProjectTitle, 1, { autoAlpha: 0, ease: Power3.easeOut }, 0);
       }
     },
 

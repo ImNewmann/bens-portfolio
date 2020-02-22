@@ -57,7 +57,7 @@
         background-image: url('#{$assets-dir}noise.gif');
         background-clip: text;
         z-index: 5;
-
+        backface-visibility: hidden;
     }
 
     &__outline {
