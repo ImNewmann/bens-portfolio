@@ -1,8 +1,8 @@
 <template>
     <div class="arrow-link link" ref="arrowLinkContainer"
         v-on="!touchDevice ? { 
-                mouseover: () => { handleHover(this.$refs, 'over') },
-                mouseleave: () => { handleHover(this.$refs, 'leave') }
+                mouseover: () => { handleHover(this.$refs, true) },
+                mouseleave: () => { handleHover(this.$refs, false) }
             } : {}"
         @click="() => { 
           this.$emit('clicked');
@@ -32,15 +32,14 @@ export default {
     },
 
     methods: {
-        handleHover(components, action) {
+        handleHover(components, onHover) {
           const { arrowLink } = components;
-          if (action === 'over') {
-              arrowLink.classList.add("hover");
-              this.$emit('hover', 'over')
-          } else if (action === 'leave') {
-              arrowLink.classList.remove("hover");
-              this.$emit('hover', 'leave')
+          if (onHover) {
+            arrowLink.classList.add("hover");
+          } else {
+            arrowLink.classList.remove("hover");
           }
+          this.$emit('hover', onHover)
         },
 
         animOut () {

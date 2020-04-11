@@ -71,11 +71,11 @@
       <Title showBase :text="nextProjTitle" />
       <ProjectBackground :backgroundURL="nextProjImage" />
       <ArrowLink 
-      :touchDevice="touchDevice" 
-      @hover="(val) => { handleNextHover(this.animElems, val) }" 
-      @clicked="() => { this.animateOut(this.animElems) }"
-      ref="nextLink"
-      text="VIEW PROJECT"
+        :touchDevice="touchDevice" 
+        @hover="(onHover) => { handleNextHover(this.animElems, onHover) }" 
+        @clicked="() => { this.animateOut(this.animElems) }"
+        ref="nextLink"
+        text="VIEW PROJECT"
       />
       <div ref="heightBlock" class="height-block"></div>
     </div>
@@ -223,15 +223,12 @@ export default {
         }, 1800)
     },
 
-    handleNextHover(components, action) {
+    handleNextHover(components, onHover) {
+      if (this.animationActive) return;
+
       const tl = new TimelineMax();
-      if (action === "over" && !this.animationActive) {
-        tl.to(components.nextProjectBGScale, 0.8, { rotation: 7, scale: 2.2, autoAlpha: 1, ease: Power3.easeOut }, 0)
-          .to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0);
-      } else if (action === "leave" && !this.animationActive) {
-        tl.to(components.nextProjectBGScale, 0.8, { rotation: 0, scale: 2, autoAlpha: 0, ease: Power3.easeOut }, 0)
-          .to(components.nextProjectTitle, 1, { autoAlpha: 0, ease: Power3.easeOut }, 0);
-      }
+      tl.to(components.nextProjectBGScale, 0.8, { rotation: onHover ? 7 : 0, scale: onHover ? 2.2 : 2, autoAlpha: onHover ? 1 : 0, ease: Power3.easeOut }, 0)
+        .to(components.nextProjectTitle, 1, { autoAlpha: onHover ? 1 : 0, ease: Power3.easeOut }, 0);
     },
 
     updateProjects() {

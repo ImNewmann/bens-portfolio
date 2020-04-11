@@ -2,13 +2,13 @@
   <div class="projects-list" ref="projectList">
     <ProjectBackground ref="backgroundImage1" :backgroundURL="backgroundImages.image1" />
     <ProjectBackground ref="backgroundImage2" :backgroundURL="backgroundImages.image2" />
-    <Title ref="titlePrev" :text="prevProjectTitle" classModifier="title--prev" />
+    <Title ref="titlePrev" :text="prevProjectTitle" class="title--prev" />
     <div
       class="projects-list__link link"
       @click="() => { animateContent('out') }"
       v-on="!touchDevice ? { 
-                mouseover: () => { handleHover(this.animElems, 'over')},
-                mouseleave: () => { handleHover(this.animElems, 'leave')}
+                mouseover: () => { handleHover(this.animElems, true)},
+                mouseleave: () => { handleHover(this.animElems, false)}
             } : {}"
     >
       <Title ref="currentTitle" showBase :text="currentProjectTitle" />
@@ -19,7 +19,7 @@
       :currentNum="'0' + (currentIndex + 1)"
       :maximumNum="projectTitle.length.toString()"
     />
-    <Title ref="titleNext" :text="nextProjectTitle" classModifier="title--next" />
+    <Title ref="titleNext" :text="nextProjectTitle" class="title--next" />
     <div ref="heightBlock" class="height-block"></div>
   </div>
 </template>
@@ -114,18 +114,18 @@ export default {
       }
     },
 
+    updateUI() {
+      if (!this.next && !this.prev) return;
+
+      const direction = this.next ? 'down' : 'up';
+      this.handleBackgrounds(direction);
+      this.animateProjectTitles(this.animElems, direction);
+      this.animateProjectImage(this.animElems, direction);
+      this.currentIndex = this.next ? this.currentIndex += 1 : this.currentIndex -= 1;
+    },
+
     updateProject() {
-      if (this.next === true) {
-        this.handleBackgrounds("down");
-        this.animateProjectTitles(this.animElems, "down");
-        this.animateProjectImage(this.animElems, "down");
-        this.currentIndex += 1;
-      } else if (this.prev === true) {
-        this.handleBackgrounds("up");
-        this.animateProjectTitles(this.animElems, "up");
-        this.animateProjectImage(this.animElems, "up");
-        this.currentIndex -= 1;
-      }
+      this.updateUI();
 
       this.currentIndex = this.getIndex(
         this.currentIndex,
@@ -165,32 +165,23 @@ export default {
     },
 
     handleScroll(e) {
+      if (this.next || this.prev) return;
+
       if (e.deltaY) {
-        if (e.deltaY > 0 && this.next === false && this.prev === false) {
-          this.next = true;
-          this.prev = false;
-          this.updateProject();
-        } else if (e.deltaY < 0 && this.prev === false && this.next === false) {
-          this.next = false;
-          this.prev = true;
-          this.updateProject();
-        }
+        this.next = e.deltaY > 0;
+        this.prev = e.deltaY < 0;
+        this.updateProject();
       } else if (e.changedTouches) {
-        if (e.changedTouches[0].clientY < this.touchStartVal && this.next === false && this.prev === false) {
-          this.next = true;
-          this.prev = false;
-          this.updateProject();
-        } else if (e.changedTouches[0].clientY > this.touchStartVal && this.prev === false && this.prev === false) {
-          this.next = false;
-          this.prev = true;
-          this.updateProject();
-        }
+        this.next = e.changedTouches[0].clientY < this.touchStartVal;
+        this.prev = e.changedTouches[0].clientY > this.touchStartVal;
+        this.updateProject();
       }
+
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.next = false;
         this.prev = false;
-      }, 200);
+      }, 1000);
     },
 
     handleBackgrounds(scrollDirection) {
@@ -211,29 +202,22 @@ export default {
       this.animateBackground(this.animElems);
     },
 
-    handleHover(components, action) {
+    handleHover(components, onHover) {
       const backgroundImage = this.backgroundImages.image1Active ? components.backgrounds.blur.bg1 : components.backgrounds.blur.bg2
       const hoverTL = new TimelineMax();
+      const hoverOver = !this.hoverActive && onHover;
+      const hoverLeave = this.hoverActive && !onHover;
 
-      if (!this.hoverActive && action === "over") {
-        this.hoverActive = true;
-        hoverTL
-          .to(components.currentTitleBase, 0.4, { scale: 1.1, ease: Power3.easeOut }, 0)
-          .to(components.currentTitleOutline, 0.4, { scale: 1.1, ease: Power3.easeOut }, 0)
-          .to(components.currentProjectImage, 0.8, { scale: 1.1, ease: Power3.easeOut }, 0)
-          .to(components.prevTitle, 0.4, { yPercent: -50, autoAlpha: 0, ease: Power3.easeOut }, 0)
-          .to(components.nextTitle, 0.4, { yPercent: 50, autoAlpha: 0, ease: Power3.easeOut }, 0)
-          .to(backgroundImage, 0.4, { filter: "grayscale(0.8)" }, 0);
-      } else if (this.hoverActive && action === "leave") {
-        this.hoverActive = false;
-        hoverTL
-          .to(components.currentTitleBase, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-          .to(components.currentTitleOutline, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-          .to(components.currentProjectImage, 0.8, { scale: 1, ease: Power3.easeOut }, 0)
-          .to(components.prevTitle, 0.4, { yPercent: 0, autoAlpha: 0.3, ease: Power3.easeOut }, 0)
-          .to(components.nextTitle, 0.4, { yPercent: 0, autoAlpha: 0.3, ease: Power3.easeOut }, 0)
-          .to(backgroundImage, 0.4, { filter: "grayscale(0)" }, 0);
-      }
+      if (!hoverOver && !hoverLeave) return;
+
+      this.hoverActive = hoverOver;
+      hoverTL
+        .to(components.currentTitleBase, 0.4, { scale: hoverOver ? 1.1 : 1, ease: Power3.easeOut }, 0)
+        .to(components.currentTitleOutline, 0.4, { scale: hoverOver ? 1.1 : 1, ease: Power3.easeOut }, 0)
+        .to(components.currentProjectImage, 0.8, { scale: hoverOver ? 1.1 : 1, ease: Power3.easeOut }, 0)
+        .to(components.prevTitle, 0.4, { yPercent: hoverOver ? -50 : 0, autoAlpha: hoverOver ? 0 : 0.3, ease: Power3.easeOut }, 0)
+        .to(components.nextTitle, 0.4, { yPercent: hoverOver ? 50 : 0, autoAlpha: hoverOver ? 0 : 0.3, ease: Power3.easeOut }, 0)
+        .to(backgroundImage, 0.4, { filter: `grayscale(${ hoverOver ? 0.8 : 0})` }, 0);
     },
 
     animateContent(action) { // being called from app.vue so couldn't pass refs as param
@@ -307,26 +291,17 @@ export default {
 
     animateProjectTitles(components, direction) {
       const tl = new TimelineMax()
-      tl.from(components.currentTitleBase, 0.4, {
+      const duration = 0.4;
+      const animVals = {
         autoAlpha: 0,
         yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
-        ease: Power3.easeOut
-      }, 0)
-      .from(components.currentTitleOutline, 0.4, {
-        autoAlpha: 0,
-        yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
-        ease: Power3.easeOut
-      }, 0)
-      .from(components.prevTitle, 0.4, {
-        autoAlpha: 0,
-        yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
-        ease: Power3.easeOut
-      }, 0)
-      .from(components.nextTitle, 0.4, {
-        autoAlpha: 0,
-        yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
-        ease: Power3.easeOut
-      }, 0);
+        ease: Power3.easeOut,
+      };
+
+      tl.from(components.currentTitleBase, duration, animVals, 0)
+      .from(components.currentTitleOutline, duration, animVals, 0)
+      .from(components.prevTitle, duration, animVals, 0)
+      .from(components.nextTitle, duration, animVals, 0);
     },
 
     animateProjectImage(components) {

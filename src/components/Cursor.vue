@@ -34,15 +34,15 @@ export default {
   methods: {
     initializeCursor () {
       document.addEventListener('mousemove', e => {
-          this.isActive = true;
-          this.isMoving = true;
-          this.mouseX = e.pageX;
-          this.mouseY = e.pageY;
+        this.isActive = true;
+        this.isMoving = true;
+        this.mouseX = e.pageX;
+        this.mouseY = e.pageY;
 
-          clearTimeout(this.timeout);
-          this.timeout = setTimeout(() => {
-              this.isMoving = false;
-          }, 200)
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            this.isMoving = false;
+        }, 200)
       })
     },
 
