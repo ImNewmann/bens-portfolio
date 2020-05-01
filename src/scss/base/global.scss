@@ -20,7 +20,7 @@ body {
         height: 100%;
         content: "";
         background-image: url('#{$assets-dir}noise.gif');
-        opacity: .05;
+        opacity: .04;
         pointer-events: none;
         z-index: 100;
     }

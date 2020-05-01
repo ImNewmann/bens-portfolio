@@ -1,11 +1,11 @@
 <template>
-  <div class="project">
-    <div ref="projectHeader" class="project__header">
+  <main class="project">
+    <section ref="projectHeader" class="project__header">
       <ProjectBackground :backgroundURL="currentProjImage" />
       <Title showBase :text="currentProjTitle" />
       <div class="height-block"></div>
-    </div>
-    <div class="project__content">
+    </section>
+    <section class="project__content">
       <div class="about-project">
         <div class="about-project__item">
           <ul>
@@ -66,8 +66,8 @@
           <img :src="imageURL" />
         </div>
       </div>
-    </div>
-    <div ref="projectFooter" class="project__footer">
+    </section>
+    <section ref="projectFooter" class="project__footer">
       <Title showBase :text="nextProjTitle" />
       <ProjectBackground :backgroundURL="nextProjImage" />
       <ArrowLink 
@@ -78,11 +78,11 @@
         text="VIEW PROJECT"
       />
       <div ref="heightBlock" class="height-block"></div>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>
 <script>
-import { TweenMax, TimelineMax, Power3 } from "gsap";
+import gsap from "gsap";
 import 'intersection-observer' //Polyfill
 import ProjectBackground from "./ProjectBackground";
 import Title from "./Title";
@@ -178,9 +178,9 @@ export default {
     },
 
     fadeIn(el, y, isText) {
-      TweenMax.fromTo(el, 1.4,
+      gsap.fromTo(el, 1.4,
           { autoAlpha: 0, y: y, scaleY: isText ? 1.5 : 1 },
-          { autoAlpha: 1, y: 0, scaleY: 1, ease: Power3.easeOut })
+          { autoAlpha: 1, y: 0, scaleY: 1, ease: 'power3.out' })
           .eventCallback('onComplete', () => {
             el.style.willChange = 'auto'
           })
@@ -190,33 +190,33 @@ export default {
       const images = document.querySelectorAll('.image')
       const listItems = document.querySelectorAll('.about-project ul')
       
-      TweenMax.set(components.nextProjectBGScale, { scale: 2, autoAlpha: 0 });
-      TweenMax.set(components.nextProjectBG, { autoAlpha: 0.6, height: "100vh" });
-      TweenMax.set(components.nextProjectTitle, { autoAlpha: 0 });
-      TweenMax.set(components.nextLink, { autoAlpha: 1, xPercent: 0 });
-      TweenMax.set(components.heightBlock, { transform: 'translateY(100%)' });
+      gsap.set(components.nextProjectBGScale, { scale: 2, autoAlpha: 0 });
+      gsap.set(components.nextProjectBG, { autoAlpha: 0.6, height: "100vh" });
+      gsap.set(components.nextProjectTitle, { autoAlpha: 0 });
+      gsap.set(components.nextLink, { autoAlpha: 1, xPercent: 0 });
+      gsap.set(components.heightBlock, { transform: 'translateY(100%)' });
 
       images.forEach(image => {
-        TweenMax.set(image, { autoAlpha: 0 });
+        gsap.set(image, { autoAlpha: 0 });
       })
 
       listItems.forEach(item => {
-        TweenMax.set(item, { autoAlpha: 0 });
+        gsap.set(item, { autoAlpha: 0 });
       })
     },
 
     animateOut(components) {
-      const tl = new TimelineMax();
+      const tl = gsap.timeline();
 
       this.animationActive = true;
       this.$emit("projectClicked");
       window.scroll(0, document.body.scrollHeight)
       tl
         .set(components.body, {overflow: 'hidden'}, 0.2)
-        .to(components.nextProjectBGScale, 1.4, { scale: 1, autoAlpha: 1, rotation: 0, ease: Power3.easeOut }, 0.2)
-        .to(components.nextProjectBG, 1.4, { autoAlpha: 0.9, ease: Power3.easeOut }, 0.2)
-        .to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: Power3.easeOut }, 0.8)
-        .to(components.heightBlock, 0.6, { transform: 'translateY(1px)', ease: Power3.easeOut }, 1.2) // HEIGHT
+        .to(components.nextProjectBGScale, 1.4, { scale: 1, autoAlpha: 1, rotation: 0, ease: 'power3.out' }, 0.2)
+        .to(components.nextProjectBG, 1.4, { autoAlpha: 0.9, ease: 'power3.out' }, 0.2)
+        .to(components.nextProjectTitle, 1, { autoAlpha: 1, ease: 'power3.out' }, 0.8)
+        .to(components.heightBlock, 0.6, { transform: 'translateY(1px)', ease: 'power3.out' }, 1.2) // HEIGHT
 
         setTimeout(() => {
           this.$emit("updateIndex", this.index + 1);
@@ -226,9 +226,9 @@ export default {
     handleNextHover(components, onHover) {
       if (this.animationActive) return;
 
-      const tl = new TimelineMax();
-      tl.to(components.nextProjectBGScale, 0.8, { rotation: onHover ? 7 : 0, scale: onHover ? 2.2 : 2, autoAlpha: onHover ? 1 : 0, ease: Power3.easeOut }, 0)
-        .to(components.nextProjectTitle, 1, { autoAlpha: onHover ? 1 : 0, ease: Power3.easeOut }, 0);
+      const tl = gsap.timeline();
+      tl.to(components.nextProjectBGScale, 0.8, { rotation: onHover ? 7 : 0, scale: onHover ? 2.2 : 2, autoAlpha: onHover ? 1 : 0, ease: 'power3.out' }, 0)
+        .to(components.nextProjectTitle, 1, { autoAlpha: onHover ? 1 : 0, ease: 'power3.out' }, 0);
     },
 
     updateProjects() {

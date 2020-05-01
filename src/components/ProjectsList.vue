@@ -1,5 +1,5 @@
 <template>
-  <div class="projects-list" ref="projectList">
+  <section class="projects-list" ref="projectList">
     <ProjectBackground ref="backgroundImage1" :backgroundURL="backgroundImages.image1" />
     <ProjectBackground ref="backgroundImage2" :backgroundURL="backgroundImages.image2" />
     <Title ref="titlePrev" :text="prevProjectTitle" class="title--prev" />
@@ -21,11 +21,11 @@
     />
     <Title ref="titleNext" :text="nextProjectTitle" class="title--next" />
     <div ref="heightBlock" class="height-block"></div>
-  </div>
+  </section>
 </template>
 
 <script>
-import { TimelineMax, Power3 } from "gsap";
+import gsap from "gsap";
 import ProjectThumbnail from "./ProjectThumbnail";
 import ProjectBackground from "./ProjectBackground";
 import Title from "./Title";
@@ -204,7 +204,7 @@ export default {
 
     handleHover(components, onHover) {
       const backgroundImage = this.backgroundImages.image1Active ? components.backgrounds.blur.bg1 : components.backgrounds.blur.bg2
-      const hoverTL = new TimelineMax();
+      const hoverTL = gsap.timeline();
       const hoverOver = !this.hoverActive && onHover;
       const hoverLeave = this.hoverActive && !onHover;
 
@@ -212,11 +212,11 @@ export default {
 
       this.hoverActive = hoverOver;
       hoverTL
-        .to(components.currentTitleBase, 0.4, { scale: hoverOver ? 1.1 : 1, ease: Power3.easeOut }, 0)
-        .to(components.currentTitleOutline, 0.4, { scale: hoverOver ? 1.1 : 1, ease: Power3.easeOut }, 0)
-        .to(components.currentProjectImage, 0.8, { scale: hoverOver ? 1.1 : 1, ease: Power3.easeOut }, 0)
-        .to(components.prevTitle, 0.4, { yPercent: hoverOver ? -50 : 0, autoAlpha: hoverOver ? 0 : 0.3, ease: Power3.easeOut }, 0)
-        .to(components.nextTitle, 0.4, { yPercent: hoverOver ? 50 : 0, autoAlpha: hoverOver ? 0 : 0.3, ease: Power3.easeOut }, 0)
+        .to(components.currentTitleBase, 0.4, { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' }, 0)
+        .to(components.currentTitleOutline, 0.4, { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' }, 0)
+        .to(components.currentProjectImage, 0.8, { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' }, 0)
+        .to(components.prevTitle, 0.4, { yPercent: hoverOver ? -50 : 0, autoAlpha: hoverOver ? 0 : 0.3, ease: 'power3.out' }, 0)
+        .to(components.nextTitle, 0.4, { yPercent: hoverOver ? 50 : 0, autoAlpha: hoverOver ? 0 : 0.3, ease: 'power3.out' }, 0)
         .to(backgroundImage, 0.4, { filter: `grayscale(${ hoverOver ? 0.8 : 0})` }, 0);
     },
 
@@ -224,7 +224,7 @@ export default {
       const components = this.animElems
       const backgroundImageWrapper = this.backgroundImages.image1Active ? components.backgrounds.wrapper.bg1 : components.backgrounds.wrapper.bg2
       const backgroundImageClear = this.backgroundImages.image1Active ? components.backgrounds.clear.bg1 : components.backgrounds.clear.bg2
-      const animateTL = new TimelineMax();
+      const animateTL = gsap.timeline();
 
       if (action === "out") {
         components.prevTitle.style.display = "none";
@@ -237,15 +237,15 @@ export default {
         const speed = 1
         const delay = 0.2
         animateTL
-        .to(components.currentTitleBase, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-        .to(components.currentTitleOutline, 0.4, { scale: 1, ease: Power3.easeOut }, 0)
-        .to(components.currentProjectImage, 0.6 * speed, { autoAlpha: 0, skewX: -7, xPercent: 20, ease: Power3.easeOut }, 0 + delay)
-        .to(components.currentTitleBase, 0.4 * speed, { autoAlpha: 0, scale: 1, ease: Power3.easeOut }, 0.2 + delay)
-        .to(backgroundImageWrapper, 1.2 * speed, { autoAlpha: 0.9, ease: Power3.easeOut }, 0.2 + delay) // BG SCALE
-        .to(backgroundImageClear, 1.8 * speed, { scale: 1, autoAlpha: 1, ease: Power3.easeOut}, 0.2 + delay) //BLUR OUT
-        .to(components.counter, 0.4 * speed, { autoAlpha: 0, ease: Power3.easeOut }, 0.2 + delay)
-        .to(components.currentTitleBase, 1.2 * speed, { autoAlpha: 1, ease: Power3.easeOut }, 1.2 + delay) // TITLE FILL
-        .to(components.heightBlock, 0.6 * speed, { transform: 'translateY(1px)', ease: Power3.easeOut }, 1.6 + delay) // HEIGHT
+        .to(components.currentTitleBase, 0.4, { scale: 1, ease: 'power3.out' }, 0)
+        .to(components.currentTitleOutline, 0.4, { scale: 1, ease: 'power3.out' }, 0)
+        .to(components.currentProjectImage, 0.6 * speed, { autoAlpha: 0, skewX: -7, xPercent: 20, ease: 'power3.out' }, 0 + delay)
+        .to(components.currentTitleBase, 0.4 * speed, { autoAlpha: 0, scale: 1, ease: 'power3.out' }, 0.2 + delay)
+        .to(backgroundImageWrapper, 1.2 * speed, { autoAlpha: 0.9, ease: 'power3.out' }, 0.2 + delay) // BG SCALE
+        .to(backgroundImageClear, 1.8 * speed, { scale: 1, autoAlpha: 1, ease: 'power3.out'}, 0.2 + delay) //BLUR OUT
+        .to(components.counter, 0.4 * speed, { autoAlpha: 0, ease: 'power3.out' }, 0.2 + delay)
+        .to(components.currentTitleBase, 1.2 * speed, { autoAlpha: 1, ease: 'power3.out' }, 1.2 + delay) // TITLE FILL
+        .to(components.heightBlock, 0.6 * speed, { transform: 'translateY(1px)', ease: 'power3.out' }, 1.6 + delay) // HEIGHT
 
       } else if (action === "in") {
         const speed = 1;
@@ -253,22 +253,22 @@ export default {
         animateTL
         .fromTo(components.currentProjectImage, 0.4 * speed, 
             { autoAlpha: 0.001, yPercent: -50, xPercent: `${this.touchDevice ? 15 : 20}`, skewX: -7}, 
-            { autoAlpha: 1, yPercent: -50, xPercent: 0, skewX: 0, ease: Power3.easeOut }, 0.1 + delay)
+            { autoAlpha: 1, yPercent: -50, xPercent: 0, skewX: 0, ease: 'power3.out' }, 0.1 + delay)
         .fromTo(components.currentTitleBase, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2},
-            { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
+            { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: 'power3.out' }, 0.3 + delay)
         .fromTo(components.currentTitleOutline, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -50, scaleX: 1.2},
-            { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: Power3.easeOut }, 0.3 + delay)
+            { autoAlpha: 1, yPercent: -50, scaleX: 1, xPercent: 0, ease: 'power3.out' }, 0.3 + delay)
         .fromTo(components.prevTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: -100, skewX: -20, skewY: -20 },
-            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.3 + delay)
+            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: 'power3.out' }, 0.3 + delay)
         .fromTo(components.nextTitle, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 100, skewX: -20, skewY: 20 },
-            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: Power3.easeOut }, 0.3 + delay)
+            { autoAlpha: 0.3, yPercent: 0, skewX: 0, skewY: 0, ease: 'power3.out' }, 0.3 + delay)
         .fromTo(components.counter, 0.4 * speed,
             { autoAlpha: 0.001, yPercent: 50 },
-            { autoAlpha: 1, yPercent: 0, ease: Power3.easeOut }, 0.7 + delay)
+            { autoAlpha: 1, yPercent: 0, ease: 'power3.out' }, 0.7 + delay)
         .fromTo(backgroundImageWrapper, 1 * speed,
             { autoAlpha: 0 },
             { autoAlpha: 0.7 }, 0.7 + delay)
@@ -284,28 +284,29 @@ export default {
       const backgroundImage2 = components.backgrounds.wrapper.bg2;
       const startingPointBG = this.backgroundImages.image1Active ? backgroundImage2 : backgroundImage1;
       const endingPointBG = this.backgroundImages.image1Active ? backgroundImage1 : backgroundImage2;
-      const tl = new TimelineMax()
+      const tl = gsap.timeline()
       tl.to(startingPointBG, 1, { autoAlpha: 0}, 0.7)
       tl.to(endingPointBG, 1, { autoAlpha: 0.7}, 0.7);
     },
 
     animateProjectTitles(components, direction) {
-      const tl = new TimelineMax()
+      const tl = gsap.timeline();
       const duration = 0.4;
       const animVals = {
         autoAlpha: 0,
-        yPercent: `${direction === "down" ? "50vh" : "-50vh"}`,
-        ease: Power3.easeOut,
+        transform: `translateY(${direction === "down" ? '50vh' : '-50vh'})`,
+        ease: 'power3.out',
       };
 
-      tl.from(components.currentTitleBase, duration, animVals, 0)
+      tl
+      .from(components.currentTitleBase, duration, animVals, 0)
       .from(components.currentTitleOutline, duration, animVals, 0)
       .from(components.prevTitle, duration, animVals, 0)
       .from(components.nextTitle, duration, animVals, 0);
     },
 
     animateProjectImage(components) {
-      const featuredImageTL = new TimelineMax();
+      const featuredImageTL = gsap.timeline();
 
       featuredImageTL.set(components.projectList, {pointerEvents: 'none'})
       .to(components.currentProjectImage, 0.5,
@@ -313,14 +314,14 @@ export default {
             autoAlpha: 0.01,
             xPercent: `${this.touchDevice ? 15 : 20}`,
             skewX: -7,
-            ease: Power3.easeOut
+            ease: 'power3.out'
           }, 0)
         .to(components.currentProjectImage, 0.6,
           {
             autoAlpha: 1,
             xPercent: 0,
             skewX: 0,
-            ease: Power3.easeOut
+            ease: 'power3.out'
           }, 0.7)
         .set(components.projectList, {pointerEvents: 'all'}, 1.4)
     },

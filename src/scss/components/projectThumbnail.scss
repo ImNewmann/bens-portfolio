@@ -5,6 +5,7 @@
     opacity: 0;  
     transform: scale(1) skew(0deg, 0deg);
     will-change: opacity;
+    backface-visibility: hidden;
     z-index: 5;
 
     &__image {

@@ -16,7 +16,7 @@
     </nav>
 </template>
 <script>
-import { TweenMax, Power3 } from "gsap"
+import gsap from "gsap"
 import Name from './Name'
  
 export default {
@@ -41,7 +41,7 @@ export default {
             const navLinks = this.$refs.navLinks
             const name = this.$refs.name
             setTimeout(() => { 
-                TweenMax.fromTo(navLinks, 0.4, {autoAlpha: 0, xPercent: 50, skewX: -16}, {autoAlpha: 1, xPercent: 0, skewX: 0, ease: Power3.easeOut})
+                gsap.fromTo(navLinks, 0.4, {autoAlpha: 0, xPercent: 50, skewX: -16}, {autoAlpha: 1, xPercent: 0, skewX: 0, ease: 'power3.out'})
                 name.fadeIn() 
             }, delay);
         },
@@ -49,7 +49,7 @@ export default {
         animOut() {
             const navLinks = this.$refs.navLinks
             const name = this.$refs.name
-            TweenMax.to(navLinks, 0.4, {autoAlpha: 0, xPercent: 50, skewX: -16, ease: Power3.easeOut}, 0)
+            gsap.to(navLinks, 0.4, {autoAlpha: 0, xPercent: 50, skewX: -16, ease: 'power3.out'}, 0)
             name.fadeOut();
         }
     }

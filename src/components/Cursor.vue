@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { TweenMax } from 'gsap/TweenMax'
+import gsap from 'gsap'
 
 export default {
   name: 'CustomCursor',
@@ -41,13 +41,13 @@ export default {
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            this.isMoving = false;
+          this.isMoving = false;
         }, 200)
       })
     },
 
     animateCursor () {
-      TweenMax.to({}, 0.016, {
+      gsap.to({}, 0.016, {
         repeat: -1,
         onRepeat: () => {
           this.posX += (this.mouseX - this.posX) / 9;
