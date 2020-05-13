@@ -45,12 +45,12 @@ export default {
   },
 
   mounted() {
-    observe('.about-project', this.animIn, 0.25);
+    observe('.about-project', this.animIn, 0.1);
   },
 
   updated() {
     this.resetStyles();
-    this.$nextTick(() => observe('.about-project', this.animIn, 0.25));
+    this.$nextTick(() => observe('.about-project', this.animIn, 0.1));
   },
 
   methods: {

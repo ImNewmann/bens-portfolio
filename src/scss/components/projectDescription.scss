@@ -3,7 +3,7 @@
   color: $textColour;
   text-transform: uppercase;
   text-align: left;
-  margin-bottom: 110px;
+  margin-bottom: 180px;
   padding: 0 5%;
   opacity: 0;
   transform: translateY(100%) scaleY(2);
@@ -19,6 +19,7 @@
     justify-content: space-between;
     padding: 0;
     margin-top: 110px;
+    margin-bottom: 110px;
   }
 
   &__item {
