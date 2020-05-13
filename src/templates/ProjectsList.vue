@@ -492,7 +492,7 @@ export default {
           0.5,
           {
             autoAlpha: 0.01,
-            xPercent: `${this.touchDevice ? 15 : 20}`,
+            xPercent: 15,
             skewX: -7,
             ease: 'power3.out',
           },

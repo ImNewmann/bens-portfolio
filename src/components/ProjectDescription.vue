@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import gsap from 'gsap';
 import observe from '@/utilities/observe.js';
 
 export default {
@@ -46,26 +45,21 @@ export default {
   },
 
   mounted() {
-    observe('.about-project', this.animIn, 1);
+    observe('.about-project', this.animIn, 0.25);
   },
 
   updated() {
     this.resetStyles();
-    this.$nextTick(() => observe('.about-project', this.animIn, 0.3));
+    this.$nextTick(() => observe('.about-project', this.animIn, 0.25));
   },
 
   methods: {
     animIn(el) {
-      gsap.fromTo(
-        el,
-        1,
-        { autoAlpha: 0, scaleY: 2, y: 200 },
-        { autoAlpha: 1, scaleY: 1, y: 0, ease: 'power3.out' }
-      );
+      el.classList.add('enter');
     },
 
     resetStyles() {
-      gsap.set(this.$refs.aboutProject, { autoAlpha: 0 });
+      this.$refs.aboutProject.classList.remove('enter');
     },
   },
 };

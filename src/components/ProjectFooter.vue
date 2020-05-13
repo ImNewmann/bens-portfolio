@@ -139,7 +139,8 @@ export default {
       gsap.set(components.nextLink, { autoAlpha: 1, xPercent: 0 });
       gsap.set(components.heightBlock, { transform: 'translateY(100%)' });
 
-      images.forEach((image) => gsap.set(image, { scale: 0.9 }));
+      // images.forEach(image => gsap.set(image, { scale: 0.9 }));
+      images.forEach((image) => image.classList.remove('enter'));
     },
   },
 };

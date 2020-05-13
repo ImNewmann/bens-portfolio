@@ -6,6 +6,13 @@
   margin-bottom: 110px;
   padding: 0 5%;
   opacity: 0;
+  transform: translateY(100%) scaleY(2);
+  transition: all 1s $bezierCurve;
+
+  &.enter {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
 
   @include breakpoint(tablet) {
     display: flex;

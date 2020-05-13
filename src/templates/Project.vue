@@ -57,7 +57,7 @@
   </main>
 </template>
 <script>
-import gsap from 'gsap';
+// import gsap from "gsap";
 import observe from '@/utilities/observe.js';
 import ProjectHeader from '@/components/ProjectHeader';
 import ProjectDescription from '@/components/ProjectDescription';
@@ -112,7 +112,7 @@ export default {
 
   methods: {
     fadeIn(el) {
-      gsap.fromTo(el, 0.6, { scale: 0.9 }, { scale: 1, ease: 'power3.out' });
+      el.classList.add('enter');
     },
 
     updateProjects() {
