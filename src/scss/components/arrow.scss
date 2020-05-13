@@ -11,7 +11,7 @@ $arrow-head-thickness: $shaft-thickness;
 .the-arrow {
   width: $shaft-width;
   transition: all 0.2s;
-  
+
   &.-left {
     position: absolute;
     top: 60%;
@@ -20,7 +20,7 @@ $arrow-head-thickness: $shaft-thickness;
     > .shaft {
       width: 0;
       background-color: $textColour;
-      
+
       &:before,
       &:after {
         width: 0;
@@ -36,25 +36,25 @@ $arrow-head-thickness: $shaft-thickness;
       }
     }
   }
-  
+
   &.-right {
     top: 3px;
-    
+
     > .shaft {
       width: $shaft-width;
       transition-delay: 0.2s;
 
       &:before,
-      &:after { 
+      &:after {
         width: $arrow-head-width;
         transition-delay: 0.3s;
         transition: all 0.5s;
       }
-      
+
       &:before {
         transform: rotate(40deg);
       }
-      
+
       &:after {
         transform: rotate(-40deg);
       }
@@ -74,7 +74,7 @@ $arrow-head-thickness: $shaft-thickness;
     &:before,
     &:after {
       background-color: $textColour;
-      content: '';
+      content: "";
       display: block;
       height: $arrow-head-thickness;
       position: absolute;
@@ -93,9 +93,9 @@ $arrow-head-thickness: $shaft-thickness;
     }
   }
 }
-    
+
 // Animated Arrow Button
-  
+
 .animated-arrow {
   display: inline-block;
   color: $textColour;
@@ -109,10 +109,9 @@ $arrow-head-thickness: $shaft-thickness;
     font-size: 20px;
   }
 
-  
   &.hover {
     color: $textColour;
-    
+
     > .the-arrow.-left {
       > .shaft {
         width: $shaft-width;
@@ -135,16 +134,16 @@ $arrow-head-thickness: $shaft-thickness;
         }
       }
     }
-    
+
     > .main {
       transform: translateX($shaft-width + $text-arrow-space);
-      
+
       > .the-arrow.-right {
         > .shaft {
           width: 0;
           transform: translateX(200%);
           transition-delay: 0;
-          
+
           &:before,
           &:after {
             width: 0;
@@ -163,17 +162,17 @@ $arrow-head-thickness: $shaft-thickness;
       }
     }
   }
-  
+
   > .main {
     display: flex;
     align-items: center;
     transition: all 0.2s;
-    
+
     > .text {
       margin: 0 $text-arrow-space 0 0;
       line-height: 1;
     }
-    
+
     > .the-arrow {
       position: relative;
     }
@@ -207,11 +206,11 @@ $arrow-head-thickness: $shaft-thickness;
     top: 90%;
   }
 
-  .the-arrow {    
+  .the-arrow {
     &.-left {
       > .shaft {
         background-color: $backgroundColour;
-        
+
         &:before,
         &:after {
           background-color: $backgroundColour;
@@ -228,10 +227,10 @@ $arrow-head-thickness: $shaft-thickness;
   }
   .animated-arrow {
     color: $backgroundColour;
-    
+
     &.hover {
       color: $backgroundColour;
-      
+
       > .the-arrow.-left {
         > .shaft {
           background-color: $backgroundColour;

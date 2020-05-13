@@ -1,20 +1,30 @@
 <template>
-    <div class="cursor" :class="{'cursor--show': isActive, 'cursor--moving': isMoving, 'cursor--link': onLink}">
-        <div class="cursor__inner" :style="{'left': mouseX + 'px', 'top': mouseY + 'px'}" ></div>
-        <div class="cursor__outer" :style="{'left': cssLeft + 'px', 'top': cssTop + 'px'}"></div>
-    </div>
+  <div
+    class="cursor"
+    :class="{
+      'cursor--show': isActive,
+      'cursor--moving': isMoving,
+      'cursor--link': onLink,
+    }"
+  >
+    <div
+      class="cursor__inner"
+      :style="{ left: mouseX + 'px', top: mouseY + 'px' }"
+    ></div>
+    <div
+      class="cursor__outer"
+      :style="{ left: cssLeft + 'px', top: cssTop + 'px' }"
+    ></div>
+  </div>
 </template>
 
 <script>
-import gsap from 'gsap'
+import gsap from 'gsap';
 
 export default {
   name: 'CustomCursor',
-  props: {
-    onLink: Boolean,
-  },
-
   data: () => ({
+    onLink: false,
     isActive: false,
     isMoving: false,
     timeout: null,
@@ -26,37 +36,55 @@ export default {
     cssTop: 0,
   }),
 
-  mounted () {
+  mounted() {
     this.initializeCursor();
     this.animateCursor();
+    this.handleLinkAnimations();
   },
 
   methods: {
-    initializeCursor () {
-      document.addEventListener('mousemove', e => {
+    initializeCursor() {
+      document.addEventListener('mousemove', (e) => {
         this.isActive = true;
         this.isMoving = true;
         this.mouseX = e.pageX;
         this.mouseY = e.pageY;
-
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.isMoving = false;
-        }, 200)
-      })
+        }, 200);
+      });
     },
 
-    animateCursor () {
+    animateCursor() {
       gsap.to({}, 0.016, {
         repeat: -1,
         onRepeat: () => {
           this.posX += (this.mouseX - this.posX) / 9;
           this.posY += (this.mouseY - this.posY) / 9;
-          this.cssLeft = this.posX
-          this.cssTop = this.posY
-        }
+          this.cssLeft = this.posX;
+          this.cssTop = this.posY;
+        },
       });
-    }
-  }
-}
+    },
+
+    onHover() {
+      this.onLink = true;
+    },
+
+    onLeave() {
+      this.onLink = false;
+    },
+
+    handleLinkAnimations() {
+      const links = document.querySelectorAll('.link');
+      links.forEach((link) => {
+        link.removeEventListener('mouseenter', this.onHover);
+        link.removeEventListener('mouseleave', this.onLeave);
+        link.addEventListener('mouseenter', this.onHover);
+        link.addEventListener('mouseleave', this.onLeave);
+      });
+    },
+  },
+};
 </script>

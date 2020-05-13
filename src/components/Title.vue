@@ -10,7 +10,7 @@ export default {
   name: 'Title',
   props: {
     text: String,
-    showBase: Boolean
-  }
-}
+    showBase: Boolean,
+  },
+};
 </script>
