@@ -26,7 +26,7 @@
       </ul>
     </div>
     <a :href="link" class="about-project__visit-link link" target="_blank">
-      Visit Project
+      View live site
     </a>
   </div>
 </template>
