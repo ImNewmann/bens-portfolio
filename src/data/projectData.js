@@ -9,7 +9,7 @@ export default [
     year: 'Oct 2020 - Present',
     technology: ['Wordpress', 'Fullpage', 'GSAP', 'Vanilla JS'],
     description:
-      'Yondr’s mission is to help clients meet their data center capacity and technical real estate needs. This project was my first as a team lead. This meant architecting and developing the technical solution whilst also maintaining communication with the client and making decisive decisions on a daily basis.',
+      'Yondr’s mission is to help clients meet their data center capacity and technical real estate needs. This project was my first as a team lead at HEX digital. This meant architecting and developing the technical solution whilst also maintaining communication with the client and making decisions on a daily basis.',
     link: 'https://www.yondrgroup.com',
     logo: [require('../assets/images/yondr/yondr-logo.svg')],
     imagesDesktop: [
