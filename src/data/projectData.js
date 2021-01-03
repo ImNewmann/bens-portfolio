@@ -13,8 +13,6 @@ export default [
     link: 'https://www.yondrgroup.com',
     logo: [require('../assets/images/yondr/yondr-logo.svg')],
     imagesDesktop: [
-      require('../assets/images/yondr/metrobloc.jpg'),
-      require('../assets/images/yondr/hyperbloc.jpg'),
       require('../assets/images/yondr/desktop-home-hero.png'),
       require('../assets/images/yondr/desktop-speed.png'),
       require('../assets/images/yondr/desktop-scale.png'),
@@ -22,6 +20,8 @@ export default [
       require('../assets/images/yondr/desktop-friends.png'),
       require('../assets/images/yondr/desktop-explorers.png'),
       require('../assets/images/yondr/desktop-heroes.png'),
+      require('../assets/images/yondr/metrobloc.jpg'),
+      require('../assets/images/yondr/hyperbloc.jpg'),
     ],
     imagesMobile: [],
   },
