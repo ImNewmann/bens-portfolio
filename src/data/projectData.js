@@ -56,7 +56,7 @@ export default [
     technology: ['Vue', 'Wordpress Rest API'],
     description:
       'Tom Newman is a creative director who produces a variety of content for companies, particularly within the eSports and MMA industry. The idea for his portfolio was a simple yet effective design, that puts his content at the forefront.',
-    link: 'http://www.tomnewman.eu',
+    link: 'https://www.tomnewman.eu',
     logo: [require('../assets/images/tom-website/main-logo2.png')],
     imagesDesktop: [
       require('../assets/images/tom-website/loading.png'),
@@ -96,7 +96,7 @@ export default [
     technology: ['Vue.js', 'BEM', 'Qubit', 'Optimizely'],
     description:
       'At Jet2 I worked within a large team to deliver the new jet2holidays.com website. The website draws in millions of visits a month, so the emphasis was on building something that was scalable and reusable, as we continued to test and develop features post-launch.',
-    link: 'http://www.jet2holidays.com',
+    link: 'https://www.jet2holidays.com',
     logo: [require('../assets/images/jet2/jet2logo.png'), require('../assets/images/jet2/indulgentlogo.png')],
     imagesDesktop: [
       require('../assets/images/jet2/desktop-homepage.png'),
