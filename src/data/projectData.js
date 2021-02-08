@@ -1,5 +1,25 @@
 export default [
   {
+    projectTitle: 'PROSTACK HOSTING',
+    projectImage: [
+      require('../assets/images/prostack/prostack.png'),
+      require('../assets/images/prostack/prostack-blur.png'),
+    ],
+    role: 'Web Developer',
+    year: 'Feb - May 2020',
+    technology: ['Nuxt.js', 'Wordpress Rest API'],
+    description:
+      'Prostack provides managed hosting services with a human face. Joining Hex Digital in February, I was the main developer delivering this project alongside other talented designers.',
+    link: 'https://www.prostack.uk',
+    logo: [require('../assets/images/prostack/prostack-logo.png')],
+    imagesDesktop: [
+      require('../assets/images/prostack/desktop-front.gif'),
+      require('../assets/images/prostack/desktop-hosting.gif'),
+      require('../assets/images/prostack/desktop-team.gif'),
+    ],
+    imagesMobile: [],
+  },
+  {
     projectTitle: 'YONDR GROUP',
     projectImage: [
       require('../assets/images/yondr/yondr.png'),
@@ -22,26 +42,6 @@ export default [
       require('../assets/images/yondr/desktop-heroes.png'),
       require('../assets/images/yondr/metrobloc.jpg'),
       require('../assets/images/yondr/hyperbloc.jpg'),
-    ],
-    imagesMobile: [],
-  },
-  {
-    projectTitle: 'PROSTACK HOSTING',
-    projectImage: [
-      require('../assets/images/prostack/prostack.png'),
-      require('../assets/images/prostack/prostack-blur.png'),
-    ],
-    role: 'Web Developer',
-    year: 'Feb - May 2020',
-    technology: ['Nuxt.js', 'Wordpress Rest API'],
-    description:
-      'Prostack provides managed hosting services with a human face. Joining Hex Digital in February, I was the main developer delivering this project alongside other talented designers.',
-    link: 'https://www.prostack.uk',
-    logo: [require('../assets/images/prostack/prostack-logo.png')],
-    imagesDesktop: [
-      require('../assets/images/prostack/desktop-front.gif'),
-      require('../assets/images/prostack/desktop-hosting.gif'),
-      require('../assets/images/prostack/desktop-team.gif'),
     ],
     imagesMobile: [],
   },
