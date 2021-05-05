@@ -1,70 +1,68 @@
 .cursor {
-  visibility: hidden;
-  @include breakpoint(desktop) {
-    visibility: visible;
-  }
-  &__inner,
-  &__outer {
-    opacity: 0;
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background-color: rgba(255, 255, 255, 0.705);
-    border-radius: 100%;
-    user-select: none;
-    pointer-events: none;
-    z-index: 10000;
-  }
-
-  &__inner {
-    transition: transform 0.3s ease, opacity 1s ease,
-      background-color 0.4s $bezierCurve;
-  }
-
-  &__outer {
-    transition: transform 0.5s ease, opacity 1s ease,
-      background-color 0.4s $bezierCurve;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 100%;
-    transform: translate(-7px, -7px) scale(1);
-  }
-
-  &--show {
-    .cursor__inner,
-    .cursor__outer {
-      opacity: 1;
+    visibility: hidden;
+    @include breakpoint(desktop) {
+        visibility: visible;
     }
-  }
-
-  &--moving {
-    .cursor__outer {
-      transform: translate(-7px, -7px) scale(1.3);
+    &__inner,
+    &__outer {
+        opacity: 0;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.705);
+        border-radius: 100%;
+        user-select: none;
+        pointer-events: none;
+        z-index: 10000;
     }
-  }
 
-  &--link {
-    .cursor {
-      &__outer {
-        transition: transform 0.6s cubic-bezier(0.75, -1.27, 0.3, 2.33);
-        transform: scale(3);
-      }
-
-      &__inner {
-        transform: scale(1.5);
-      }
+    &__inner {
+        transition: transform 0.3s ease, opacity 1s ease, background-color 0.4s $bezierCurve;
     }
-  }
+
+    &__outer {
+        transition: transform 0.5s ease, opacity 1s ease, background-color 0.4s $bezierCurve;
+        width: 20px;
+        height: 20px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 100%;
+        transform: translate(-7px, -7px) scale(1);
+    }
+
+    &--show {
+        .cursor__inner,
+        .cursor__outer {
+            opacity: 1;
+        }
+    }
+
+    &--moving {
+        .cursor__outer {
+            transform: translate(-7px, -7px) scale(1.3);
+        }
+    }
+
+    &--link {
+        .cursor {
+            &__outer {
+                transition: transform 0.6s cubic-bezier(0.75, -1.27, 0.3, 2.33);
+                transform: scale(3);
+            }
+
+            &__inner {
+                transform: scale(1.5);
+            }
+        }
+    }
 }
 
 .about-overlay {
-  .cursor {
-    &__inner {
-      background-color: rgba(0, 0, 0, 0.705);
+    .cursor {
+        &__inner {
+            background-color: rgba(0, 0, 0, 0.705);
+        }
+        &__outer {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
     }
-    &__outer {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  }
 }

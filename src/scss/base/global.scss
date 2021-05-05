@@ -1,40 +1,40 @@
 html {
-  cursor: none;
-  user-select: none;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 800;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  scrollbar-width: none;
+    cursor: none;
+    user-select: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-width: none;
 }
 
 body {
-  overscroll-behavior-y: contain;
-  background-color: $backgroundColour;
+    overscroll-behavior-y: contain;
+    background-color: $backgroundColour;
 
-  &:after {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-    background-image: url("#{$assets-dir}noise.gif");
-    opacity: 0.04;
-    pointer-events: none;
-    z-index: 100;
-  }
+    &:after {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-image: url('#{$assets-dir}noise.gif');
+        opacity: 0.04;
+        pointer-events: none;
+        z-index: 100;
+    }
 }
 
 a {
-  cursor: none;
+    cursor: none;
 }
 
 #app {
-  position: relative;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }

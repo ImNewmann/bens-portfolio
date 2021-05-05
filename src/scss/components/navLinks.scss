@@ -1,67 +1,67 @@
 .nav-links {
-  position: fixed;
-  z-index: 10;
-  top: 10%;
-  right: 8%;
-  opacity: 0;
-
-  @include breakpoint(tablet) {
-    right: 5%;
-  }
-
-  &__item {
-    color: $textColour;
-    font-size: 3.3vw;
-    list-style: none;
-    text-transform: uppercase;
-    font-weight: 600;
-    text-align: right;
-    padding-bottom: 15px;
-    letter-spacing: 1px;
-    transition: color 0.4s $bezierCurve, transform 0.2s $bezierCurve;
+    position: fixed;
+    z-index: 10;
+    top: 10%;
+    right: 8%;
+    opacity: 0;
 
     @include breakpoint(tablet) {
-      font-size: 14px;
+        right: 5%;
     }
 
-    &.active,
-    &:hover {
-      transform: translateX(-15px);
-    }
-    &.active:after,
-    &:hover:after {
-      opacity: 1;
-    }
+    &__item {
+        color: $textColour;
+        font-size: 3.3vw;
+        list-style: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: right;
+        padding-bottom: 15px;
+        letter-spacing: 1px;
+        transition: color 0.4s $bezierCurve, transform 0.2s $bezierCurve;
 
-    &:after {
-      opacity: 0;
-      content: "";
-      mix-blend-mode: difference;
-      position: absolute;
-      top: 0;
-      right: -12px;
-      background: $textColour;
-      width: 7px;
-      height: 15px;
-      transition: opacity 0.2s $bezierCurve;
-    }
+        @include breakpoint(tablet) {
+            font-size: 14px;
+        }
 
-    a {
-      color: inherit;
-      cursor: none;
-      text-decoration: none;
+        &.active,
+        &:hover {
+            transform: translateX(-15px);
+        }
+        &.active:after,
+        &:hover:after {
+            opacity: 1;
+        }
+
+        &:after {
+            opacity: 0;
+            content: '';
+            mix-blend-mode: difference;
+            position: absolute;
+            top: 0;
+            right: -12px;
+            background: $textColour;
+            width: 7px;
+            height: 15px;
+            transition: opacity 0.2s $bezierCurve;
+        }
+
+        a {
+            color: inherit;
+            cursor: none;
+            text-decoration: none;
+        }
     }
-  }
 }
 
 .about-overlay .nav-links__item {
-  color: $backgroundColour;
+    color: $backgroundColour;
 
-  &:first-of-type {
-    pointer-events: none;
-  }
+    &:first-of-type {
+        pointer-events: none;
+    }
 
-  &:after {
-    background: $backgroundColour;
-  }
+    &:after {
+        background: $backgroundColour;
+    }
 }

@@ -1,114 +1,114 @@
 .about {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  height: calc(100vh - var(--vh-offset, 0px));
-  transform-origin: top;
-  transform: scaleY(0);
-  z-index: 10;
-  background-color: white;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    height: calc(100vh - var(--vh-offset, 0px));
+    transform-origin: top;
+    transform: scaleY(0);
+    z-index: 10;
+    background-color: white;
 
-  &__bg {
-    visibility: hidden;
-    width: 100%;
-    height: 100%;
-    background-position: 30%;
-    background-size: cover;
-
-    @include breakpoint(tablet) {
-      background-position: 25%;
-      background-size: cover;
-    }
-    @include breakpoint(desktop) {
-      background-position: 50% 15%;
-    }
-  }
-
-  &__desc {
-    padding: 20px;
-    right: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transform-origin: center;
-    width: 56%;
-
-    @include breakpoint(tablet) {
-      background-color: transparent;
-      right: 0%;
-      width: 50%;
-    }
-
-    @include breakpoint(desktop) {
-      right: 5%;
-    }
-
-    &-text {
-      p {
-        color: $backgroundColour;
-        line-height: 1.4;
-        font-weight: 700;
-        font-size: 3vh;
+    &__bg {
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        background-position: 30%;
+        background-size: cover;
 
         @include breakpoint(tablet) {
-          opacity: 0.95;
-          font-weight: 700;
-          font-size: 3.5vw;
+            background-position: 25%;
+            background-size: cover;
+        }
+        @include breakpoint(desktop) {
+            background-position: 50% 15%;
+        }
+    }
+
+    &__desc {
+        padding: 20px;
+        right: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transform-origin: center;
+        width: 56%;
+
+        @include breakpoint(tablet) {
+            background-color: transparent;
+            right: 0%;
+            width: 50%;
         }
 
         @include breakpoint(desktop) {
-          font-size: 3vw;
-        }
-      }
-
-      a {
-        margin-top: 20px;
-        text-decoration: none;
-        -webkit-text-stroke: $backgroundColour 1px;
-        color: transparent;
-        font-size: 6.5vw;
-        font-weight: 700;
-        display: inline-block;
-        position: relative;
-        text-transform: uppercase;
-        transform: translateX(5%) skewX(-15deg);
-        letter-spacing: 1px;
-        transition: transform 0.4s $bezierCurve, color 0.4s $bezierCurve;
-
-        @include breakpoint(tablet) {
-          left: 0;
-          transform: translateX(5%) skew(-15deg);
+            right: 5%;
         }
 
-        @include breakpoint(desktop) {
-          font-size: 4vw;
-        }
+        &-text {
+            p {
+                color: $backgroundColour;
+                line-height: 1.4;
+                font-weight: 700;
+                font-size: 3vh;
 
-        &:after {
-          content: "";
-          opacity: 0.9;
-          margin-top: 10px;
-          width: 50%;
-          left: 25%;
-          position: absolute;
-          height: 1px;
-          bottom: -8px;
-          background-color: $backgroundColour;
-          transform: skewX(0) scaleX(1);
-          transform-origin: center;
-          -webkit-text-stroke: rgba(255, 255, 255, 0.9) 0px;
-          transition: transform 0.4s $bezierCurve;
-        }
+                @include breakpoint(tablet) {
+                    opacity: 0.95;
+                    font-weight: 700;
+                    font-size: 3.5vw;
+                }
 
-        &:hover {
-          transform: translateX(0) skewX(0);
-          color: $backgroundColour;
+                @include breakpoint(desktop) {
+                    font-size: 3vw;
+                }
+            }
 
-          &:after {
-            transform: scaleX(0.5);
-          }
+            a {
+                margin-top: 20px;
+                text-decoration: none;
+                -webkit-text-stroke: $backgroundColour 1px;
+                color: transparent;
+                font-size: 6.5vw;
+                font-weight: 700;
+                display: inline-block;
+                position: relative;
+                text-transform: uppercase;
+                transform: translateX(5%) skewX(-15deg);
+                letter-spacing: 1px;
+                transition: transform 0.4s $bezierCurve, color 0.4s $bezierCurve;
+
+                @include breakpoint(tablet) {
+                    left: 0;
+                    transform: translateX(5%) skew(-15deg);
+                }
+
+                @include breakpoint(desktop) {
+                    font-size: 4vw;
+                }
+
+                &:after {
+                    content: '';
+                    opacity: 0.9;
+                    margin-top: 10px;
+                    width: 50%;
+                    left: 25%;
+                    position: absolute;
+                    height: 1px;
+                    bottom: -8px;
+                    background-color: $backgroundColour;
+                    transform: skewX(0) scaleX(1);
+                    transform-origin: center;
+                    -webkit-text-stroke: rgba(255, 255, 255, 0.9) 0px;
+                    transition: transform 0.4s $bezierCurve;
+                }
+
+                &:hover {
+                    transform: translateX(0) skewX(0);
+                    color: $backgroundColour;
+
+                    &:after {
+                        transform: scaleX(0.5);
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

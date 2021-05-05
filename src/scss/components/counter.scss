@@ -1,23 +1,23 @@
 .counter {
-  letter-spacing: 2px;
-  color: $textColour;
-  position: absolute;
-  top: 72%;
-  left: 8%;
-  opacity: 0;
-  font-size: 4.5vw;
-
-  @include breakpoint(tablet) {
-    top: 65%;
-    left: 18%;
-    font-size: 30px;
-  }
-
-  &--max {
-    font-size: 3vw;
+    letter-spacing: 2px;
+    color: $textColour;
+    position: absolute;
+    top: 72%;
+    left: 8%;
+    opacity: 0;
+    font-size: 4.5vw;
 
     @include breakpoint(tablet) {
-      font-size: 15px;
+        top: 65%;
+        left: 18%;
+        font-size: 30px;
     }
-  }
+
+    &--max {
+        font-size: 3vw;
+
+        @include breakpoint(tablet) {
+            font-size: 15px;
+        }
+    }
 }

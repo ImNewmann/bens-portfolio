@@ -1,47 +1,47 @@
 .project-background {
-  position: absolute;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-
-  &__item {
+    position: absolute;
     visibility: hidden;
     opacity: 0;
-    position: absolute;
-    transform: scale(2.2);
+    pointer-events: none;
     width: 100%;
     height: 100%;
-    background-position: center;
-    background-size: cover;
-    will-change: opacity;
-    backface-visibility: hidden;
-    z-index: 1;
 
-    &.blur {
-      z-index: 0;
-      visibility: visible;
-      opacity: 1;
-      filter: grayscale(0);
+    &__item {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        transform: scale(2.2);
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        will-change: opacity;
+        backface-visibility: hidden;
+        z-index: 1;
+
+        &.blur {
+            z-index: 0;
+            visibility: visible;
+            opacity: 1;
+            filter: grayscale(0);
+        }
     }
-  }
 }
 
 .project__header {
-  .project-background__item {
-    will-change: unset;
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    &.blur {
-      display: none;
+    .project-background__item {
+        will-change: unset;
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        &.blur {
+            display: none;
+        }
     }
-  }
 }
 
 .project__footer {
-  .project-background__item {
-    visibility: visible; //Having both images visible prevents image decode on hover which causes stutter, however is costly on performance so use sparingly
-  }
+    .project-background__item {
+        visibility: visible; //Having both images visible prevents image decode on hover which causes stutter, however is costly on performance so use sparingly
+    }
 }
