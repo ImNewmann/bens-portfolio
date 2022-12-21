@@ -37,8 +37,7 @@ export default {
     },
 
     data: () => ({
-        aboutDescription:
-            "Hello. My name is Ben Newman. I'm a Web Designer & Developer based in London, UK. I'm currently available for work opportunities.",
+        aboutDescription: "Hello. My name is Ben Newman. I'm a Web developer based in London, UK. I'm currently available for work opportunities.",
     }),
 
     mounted() {
@@ -57,12 +56,7 @@ export default {
             aboutTL
                 .to(about, 0.6 * speed, { scaleY: 1, ease: 'power3.out' }, 0 + delay)
                 .to(aboutBG, 1 * speed, { autoAlpha: 1 }, 0.4 + delay)
-                .from(
-                    aboutText,
-                    0.6,
-                    { xPercent: 10, scaleX: 1.2, autoAlpha: 0, ease: 'power3.out' },
-                    0.8 + delay
-                )
+                .from(aboutText, 0.6, { xPercent: 10, scaleX: 1.2, autoAlpha: 0, ease: 'power3.out' }, 0.8 + delay)
                 .from(link, 0.6, { autoAlpha: 0, xPercent: -10, ease: 'power3.out' }, 1 + delay);
             setTimeout(() => {
                 backLink.animIn();

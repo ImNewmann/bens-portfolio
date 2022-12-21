@@ -1,9 +1,10 @@
 .title {
+    font-family: $font-family-title;
     font-size: 4vw;
     line-height: 1;
 
     @include breakpoint(tablet) {
-        font-size: 3vw;
+        font-size: 2.5vw;
     }
 
     &--prev,
@@ -42,7 +43,7 @@
     &__outline {
         position: absolute;
         opacity: 0;
-        top: 65%;
+        top: 61%;
         left: 8%;
         transform: scale(1);
 
@@ -93,10 +94,6 @@
             }
         }
     }
-
-    // &__header {
-
-    // }
 
     &__footer {
         .title {

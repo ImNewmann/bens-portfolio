@@ -59,17 +59,11 @@ export default {
         },
         fadeOut() {
             const { name } = this.$refs;
-            gsap.to(name, 0.4, { autoAlpha: 0, x: -50, skewX: 16, ease: 'power3.out' }, 0);
+            gsap.to(name, 0.4, { autoAlpha: 0, xPercent: -50, skewX: 16, ease: 'power3.out' }, 0);
         },
         fadeIn() {
             const { name } = this.$refs;
-            gsap.fromTo(
-                name,
-                0.4,
-                { autoAlpha: 0, x: -50, skewX: 16 },
-                { autoAlpha: 0.9, x: 0, skewX: 0, ease: 'power3.out' },
-                0
-            );
+            gsap.fromTo(name, 0.4, { autoAlpha: 0, xPercent: -50, skewX: 16 }, { autoAlpha: 0.9, xPercent: 0, skewX: 0, ease: 'power3.out' });
         },
     },
 };

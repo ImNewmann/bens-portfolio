@@ -31,12 +31,12 @@
         top: 50%;
         transform: translateY(-50%);
         transform-origin: center;
-        width: 56%;
+        width: 60%;
 
         @include breakpoint(tablet) {
             background-color: transparent;
             right: 0%;
-            width: 50%;
+            width: 55%;
         }
 
         @include breakpoint(desktop) {
@@ -45,10 +45,12 @@
 
         &-text {
             p {
+                font-family: $font-family-title;
+
                 color: $backgroundColour;
                 line-height: 1.4;
                 font-weight: 700;
-                font-size: 3vh;
+                font-size: 2.5vh;
 
                 @include breakpoint(tablet) {
                     opacity: 0.95;
@@ -57,16 +59,17 @@
                 }
 
                 @include breakpoint(desktop) {
-                    font-size: 3vw;
+                    font-size: 2.5vw;
                 }
             }
 
             a {
+                font-family: $font-family-title;
                 margin-top: 20px;
                 text-decoration: none;
                 -webkit-text-stroke: $backgroundColour 1px;
                 color: transparent;
-                font-size: 6.5vw;
+                font-size: 6vw;
                 font-weight: 700;
                 display: inline-block;
                 position: relative;
@@ -81,7 +84,7 @@
                 }
 
                 @include breakpoint(desktop) {
-                    font-size: 4vw;
+                    font-size: 3.5vw;
                 }
 
                 &:after {

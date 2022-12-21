@@ -26,11 +26,7 @@
             <Title ref="currentTitle" showBase :text="currentProjectTitle" />
             <ProjectThumbnail ref="currentProjectImage" :src="currentImageUrl" />
         </div>
-        <ProjectCounter
-            ref="counter"
-            :currentNum="'0' + (currentIndex + 1)"
-            :maximumNum="projectTitle.length.toString()"
-        />
+        <ProjectCounter ref="counter" :currentNum="'0' + (currentIndex + 1)" :maximumNum="projectTitle.length.toString()" />
         <Title ref="titleNext" :text="nextProjectTitle" class="title--next" />
         <div ref="heightBlock" class="height-block"></div>
     </section>
@@ -141,14 +137,8 @@ export default {
 
             this.currentIndex = this.getIndex(this.currentIndex, this.projectTitles.length);
             this.currentProjectTitle = this.projectTitles[this.currentIndex];
-            this.prevProjectTitle =
-                this.currentIndex === 0
-                    ? this.projectTitles[this.projectTitles.length - 1]
-                    : this.projectTitles[this.currentIndex - 1];
-            this.nextProjectTitle =
-                this.currentIndex === this.projectTitles.length - 1
-                    ? this.projectTitles[0]
-                    : this.projectTitles[this.currentIndex + 1];
+            this.prevProjectTitle = this.currentIndex === 0 ? this.projectTitles[this.projectTitles.length - 1] : this.projectTitles[this.currentIndex - 1];
+            this.nextProjectTitle = this.currentIndex === this.projectTitles.length - 1 ? this.projectTitles[0] : this.projectTitles[this.currentIndex + 1];
             setTimeout(() => {
                 this.currentImageUrl = this.projectImages[this.currentIndex][0];
             }, 500);
@@ -194,15 +184,9 @@ export default {
         handleBackgrounds(scrollDirection) {
             let backgroundActive = this.backgroundImages.image1Active ? 'image2' : 'image1';
             if (scrollDirection === 'down') {
-                this.backgroundImages[backgroundActive] =
-                    this.currentIndex === this.projectImages.length - 1
-                        ? this.projectImages[0]
-                        : this.projectImages[this.currentIndex + 1];
+                this.backgroundImages[backgroundActive] = this.currentIndex === this.projectImages.length - 1 ? this.projectImages[0] : this.projectImages[this.currentIndex + 1];
             } else if (scrollDirection === 'up') {
-                this.backgroundImages[backgroundActive] =
-                    this.currentIndex === 0
-                        ? this.projectImages[this.projectImages.length - 1]
-                        : this.projectImages[this.currentIndex - 1];
+                this.backgroundImages[backgroundActive] = this.currentIndex === 0 ? this.projectImages[this.projectImages.length - 1] : this.projectImages[this.currentIndex - 1];
             }
             this.backgroundImages.image1Active = !this.backgroundImages.image1Active;
             this.backgroundImages.image2Active = !this.backgroundImages.image2Active;
@@ -210,9 +194,7 @@ export default {
         },
 
         handleHover(components, onHover) {
-            const backgroundImage = this.backgroundImages.image1Active
-                ? components.backgrounds.blur.bg1
-                : components.backgrounds.blur.bg2;
+            const backgroundImage = this.backgroundImages.image1Active ? components.backgrounds.blur.bg1 : components.backgrounds.blur.bg2;
             const hoverTL = gsap.timeline();
             const hoverOver = !this.hoverActive && onHover;
             const hoverLeave = this.hoverActive && !onHover;
@@ -222,18 +204,8 @@ export default {
             this.hoverActive = hoverOver;
             hoverTL
                 .to(components.currentTitleBase, 0.4, { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' }, 0)
-                .to(
-                    components.currentTitleOutline,
-                    0.4,
-                    { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' },
-                    0
-                )
-                .to(
-                    components.currentProjectImage,
-                    0.8,
-                    { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' },
-                    0
-                )
+                .to(components.currentTitleOutline, 0.4, { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' }, 0)
+                .to(components.currentProjectImage, 0.8, { scale: hoverOver ? 1.1 : 1, ease: 'power3.out' }, 0)
                 .to(
                     components.prevTitle,
                     0.4,
@@ -260,12 +232,8 @@ export default {
         animateContent(action) {
             // being called from app.vue so couldn't pass refs as param
             const components = this.animElems;
-            const backgroundImageWrapper = this.backgroundImages.image1Active
-                ? components.backgrounds.wrapper.bg1
-                : components.backgrounds.wrapper.bg2;
-            const backgroundImageClear = this.backgroundImages.image1Active
-                ? components.backgrounds.clear.bg1
-                : components.backgrounds.clear.bg2;
+            const backgroundImageWrapper = this.backgroundImages.image1Active ? components.backgrounds.wrapper.bg1 : components.backgrounds.wrapper.bg2;
+            const backgroundImageClear = this.backgroundImages.image1Active ? components.backgrounds.clear.bg1 : components.backgrounds.clear.bg2;
             const animateTL = gsap.timeline();
 
             if (action === 'out') {
@@ -279,23 +247,13 @@ export default {
                 animateTL
                     .to(components.currentTitleBase, 0.4, { scale: 1, ease: 'power3.out' }, 0.2)
                     .to(components.currentTitleOutline, 0.4, { scale: 1, ease: 'power3.out' }, 0.2)
-                    .to(
-                        components.currentProjectImage,
-                        0.6,
-                        { autoAlpha: 0, skewX: -7, xPercent: 20, ease: 'power3.out' },
-                        0.2
-                    )
+                    .to(components.currentProjectImage, 0.6, { autoAlpha: 0, skewX: -7, xPercent: 20, ease: 'power3.out' }, 0.2)
                     .to(components.currentTitleBase, 0.4, { autoAlpha: 0, scale: 1, ease: 'power3.out' }, 0.4)
                     .to(backgroundImageWrapper, 1.2, { autoAlpha: 0.9, ease: 'power3.out' }, 0.4) // BG SCALE
                     .to(backgroundImageClear, 1.8, { scale: 1, autoAlpha: 1, ease: 'power3.out' }, 0.4) //BLUR OUT
                     .to(components.counter, 0.4, { autoAlpha: 0, ease: 'power3.out' }, 0.4)
                     .to(components.currentTitleBase, 1.2, { autoAlpha: 1, ease: 'power3.out' }, 1.4) // TITLE FILL
-                    .to(
-                        components.heightBlock,
-                        0.6,
-                        { transform: 'translateY(1px)', ease: 'power3.out' },
-                        1.8
-                    ); // HEIGHT
+                    .to(components.heightBlock, 0.6, { transform: 'translateY(1px)', ease: 'power3.out' }, 1.8); // HEIGHT
             } else if (action === 'in') {
                 const delay = 1.5;
 
@@ -370,13 +328,7 @@ export default {
                         },
                         0.3 + delay
                     )
-                    .fromTo(
-                        components.counter,
-                        0.4,
-                        { autoAlpha: 0.001, yPercent: 50 },
-                        { autoAlpha: 1, yPercent: 0, ease: 'power3.out' },
-                        0.7 + delay
-                    )
+                    .fromTo(components.counter, 0.4, { autoAlpha: 0.001, yPercent: 50 }, { autoAlpha: 1, yPercent: 0, ease: 'power3.out' }, 0.7 + delay)
                     .fromTo(backgroundImageWrapper, 1, { autoAlpha: 0 }, { autoAlpha: 0.7 }, 0.7 + delay);
                 setTimeout(() => {
                     components.projectList.style.pointerEvents = 'all';
@@ -400,9 +352,11 @@ export default {
             const duration = 0.4;
             const animVals = {
                 autoAlpha: 0,
-                transform: `translateY(${direction === 'down' ? '50vh' : '-50vh'})`,
+                y: `${direction === 'down' ? '50vh' : '-50vh'}`,
                 ease: 'power3.out',
             };
+
+            console.log(components);
 
             tl.from(components.currentTitleBase, duration, animVals, 0)
                 .from(components.currentTitleOutline, duration, animVals, 0)
